@@ -2,6 +2,8 @@ package org.chaostocosmos.metadata.metaphor;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ public class MetaManager {
     /**
      * Metadata Map
      */
-    Map<Path, MetaStore> metadataMap;   
+    Map<Path, MetaStore> metadataMap;
 
     /**
      * Metadata listener list
@@ -32,36 +34,55 @@ public class MetaManager {
     List<MetaListener> metadataListeners;
 
     /**
-     * Constructs with metadata directory path
-     * @param metadataDir
+     * MetaManager instance
      */
-    public MetaManager(String metadataDir) {
-        this(Paths.get(metadataDir));
+    private static MetaManager metaManager;
+
+    /**
+     * Get MetaManager instance
+     * @param metadataPath
+     * @return
+     */
+    public static MetaManager get(Path metadataPath) {
+        if(metaManager == null) {
+            metaManager = new MetaManager(metadataPath);
+        }
+        return metaManager;
+    }
+
+    /**
+     * Constructs with metadata directory path
+     * @param metadataPath
+     */
+    private MetaManager(String metadataPath) {
+        this(Paths.get(metadataPath));
     }
 
     /**
      * Constructs with metadata directory Path object
      * @param metadataDir
      */
-    public MetaManager(Path metadataDir) {
+    private MetaManager(Path metadataDir) {
         this.metadataDir = metadataDir;
         if(!metadataDir.toFile().isDirectory()) {
             throw new IllegalArgumentException("Metadata path must be directory!!!");
         }
         this.metadataListeners = new ArrayList<>();
         load();
+        disableAccessWarnings();
     }
 
     /**
      * Load metadata files
      */
-    public void load() {
+    private synchronized void load() {
         this.metadataMap = Stream.of(this.metadataDir.toFile().listFiles(new FileFilter() {
             @Override
             public boolean accept(File pathname) {
                 String ext = pathname.getName().substring(pathname.getName().lastIndexOf(".")+1);
                 return pathname.isFile() &&
-                    ( ext.equalsIgnoreCase(META_EXT.CONF.name())
+                    (  
+                       ext.equalsIgnoreCase(META_EXT.CONF.name())
                     || ext.equalsIgnoreCase(META_EXT.CONFIG.name())
                     || ext.equalsIgnoreCase(META_EXT.JSON.name())
                     || ext.equalsIgnoreCase(META_EXT.PROPERTIES.name())
@@ -69,7 +90,18 @@ public class MetaManager {
                     || ext.equalsIgnoreCase(META_EXT.YAML.name())
                     );
             }            
-        })).map( f -> new Object[]{f.toPath(), new MetaStore(f)} ).collect(Collectors.toMap(k -> (Path)k[0], v -> (MetaStore)v[1]));
+        })).map( f -> {
+            MetaStore ms = new MetaStore(f);
+            ms.setMetaManager(metaManager);
+            return new Object[]{f.toPath(), ms};
+        }).collect(Collectors.toMap(k -> (Path)k[0], v -> (MetaStore)v[1]));
+    }
+
+    /**
+     * Reload all of meta store
+     */
+    public void reload() {
+        load();
     }
 
     /**
@@ -80,7 +112,7 @@ public class MetaManager {
      * @return
      */
     public <V> V getValue(String filename, String expr) {
-        return getMetadata(filename).getValue(expr);
+        return getMetaStore(filename).getValue(expr);
     }
 
     /**
@@ -91,16 +123,16 @@ public class MetaManager {
      * @return
      */
     public <V> V getValue(Path metaFile, String expr) {
-        return getMetadata(metaFile).getValue(expr);
+        return getMetaStore(metaFile).getValue(expr);
     }
 
     /**
      * Get metadata 
-     * @param filename
+     * @param filename 
      * @return
      */
-    public MetaStore getMetadata(String filename) {
-        return getMetadata(this.metadataDir.resolve(filename));
+    public MetaStore getMetaStore(String filename) {
+        return getMetaStore(this.metadataDir.resolve(filename));
     }
 
     /**
@@ -108,8 +140,33 @@ public class MetaManager {
      * @param metaFile
      * @return
      */
-    public MetaStore getMetadata(Path metaFile) {
+    public MetaStore getMetaStore(Path metaFile) {
         return this.metadataMap.get(metaFile);
+    }
+
+    /**
+     * Dispatch metadata event
+     * @param <T>
+     * @param eventType
+     * @param me
+     */
+    public <T> void dispatchMetaEvent(EVENT_TYPE eventType, MetaEvent<T> me) {
+        if(this.metadataListeners.size() > 0) {
+            switch(eventType) {
+                case INJECTED :
+                this.metadataListeners.stream().forEach(l -> l.metadataInjected(me));                
+                break;
+                case CREATED :
+                this.metadataListeners.stream().forEach(l -> l.metadataCreated(me));
+                break;
+                case REMOVED :
+                this.metadataListeners.stream().forEach(l -> l.metadataRemoved(me));
+                break;
+                case MODIFIED :
+                this.metadataListeners.stream().forEach(l -> l.metadataModified(me));
+                break;
+            }
+        }
     }
 
     /**
@@ -127,4 +184,24 @@ public class MetaManager {
     public void removeListener(MetaListener listener) {
         this.metadataListeners.remove(listener);
     }
+
+    /**
+     * Disable access warning
+     */
+    public void disableAccessWarnings() {
+        try {
+            Class<?> unsafeClass = Class.forName("sun.misc.Unsafe");
+            Field field = unsafeClass.getDeclaredField("theUnsafe");
+            field.setAccessible(true);
+            Object unsafe = field.get(null);
+            Method volatileMethod = unsafeClass.getDeclaredMethod("putObjectVolatile", Object.class, long.class, Object.class);
+            Method offsetMethod = unsafeClass.getDeclaredMethod("staticFieldOffset", Field.class);
+            Class<?> loggerClass = Class.forName("jdk.internal.module.IllegalAccessLogger");
+            Field loggerField = loggerClass.getDeclaredField("logger");
+            Long offset = (Long) offsetMethod.invoke(unsafe, loggerField);
+            volatileMethod.invoke(unsafe, loggerClass, offset, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }    
 }

@@ -6,13 +6,13 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
+@Target(ElementType.PARAMETER)
 /**
- * MetaMethod Annotation
+ * MetaMethodParam
  * 
  * @author 9ins
  */
-public @interface MetaMethod {    
-    //Metadata finding expression
-    public String[] parameters();
+public @interface MetaParameter {
+    // Value of parameter
+    public String expr();
 }

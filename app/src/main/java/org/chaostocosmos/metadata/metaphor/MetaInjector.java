@@ -1,11 +1,10 @@
 package org.chaostocosmos.metadata.metaphor;
 
+import java.io.Console;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,133 +19,106 @@ import java.util.stream.Collectors;
  */
 public class MetaInjector {
     /**
-     * MetaContainer
-     */
-    MetaStore metadata;
-
-    /**
-     * Constructs with metadata
-     * @param metadata
-     */
-    public MetaInjector(MetaStore metadata) {
-        this.metadata = metadata;
-    }
-
-    /**
-     * Inject
+     * Inject meta data to object field
      * @param <T>
+     * @param metadata
      * @param obj
-     * @param annotation
      * @return
      * @throws IllegalArgumentException
      * @throws IllegalAccessException
+     * @throws InvocationTargetException
+     * @throws SecurityException
+     * @throws NoSuchMethodException
+     */
+    public static <T> T injectMetaField(MetaStore metadata, T obj) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
+        return inject(metadata, obj, MetaField.class);
+    }
+
+    /**
+     * Inject field value from MetaStore file mapping with specified annotation.
+     * @param <T>
+     * @param metadata
+     * @param obj
+     * @param metaAnnotation
+     * @return
+     * @throws IllegalArgumentException
+     * @throws IllegalAccessException
+     * @throws InvocationTargetException
      */
     @SuppressWarnings("unchecked")
-    public <T> T inject(T obj, Class<? extends Annotation> annotation) throws IllegalArgumentException, IllegalAccessException {
+    public static <T> T inject(MetaStore metadata, T obj, Class<? extends Annotation> metaAnnotation) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
         if(obj instanceof Field) {
             Field field = (Field) obj;
-            Annotation annotation2 = field.getAnnotation(annotation);
-            String expr = (String) getValue(annotation2, "expr");
-            //System.out.println("expr: "+expr);
+            Annotation annotation2 = field.getAnnotation(metaAnnotation);
+            if(annotation2 == null) {
+                return (T) (field.getType().isPrimitive() ? 0L : null);
+            }
+            String expr = (String) getAnnotationValue(annotation2, "expr");
             if(List.class.isAssignableFrom(field.getType())) {
-                //System.out.println("field is List  "+field.getGenericType().getTypeName());
                 if(field.getGenericType() == null) {
-                    return this.metadata.<T> getValue(expr);
+                    return metadata.<T> getValue(expr);
                 } else {
                     List list = new ArrayList<>();
-                    List src = this.metadata.<List> getValue(expr);
+                    List src = metadata.<List> getValue(expr);
                     for(int i=0; i<src.size(); i++) {
                         final int idx = i;
-                        Object instance = newInstance(getFirstGenericClassName(field));
-                        Map<Field, String> fieldMap = Arrays.asList(instance.getClass().getDeclaredFields()).stream().map(f -> new Object[] {f, changeAnnotationValue(f.getAnnotation(annotation), "expr", getValue(f.getAnnotation(annotation), "expr").toString().replace("[i]", "["+idx+"]"))}).collect(Collectors.toMap(k -> (Field) k[0], v -> (String) v[1]));
-                        list.add(inject(instance, annotation));
-                        fieldMap.entrySet().stream().map(e -> (String) changeAnnotationValue(e.getKey().getAnnotation(annotation), "expr", e.getValue())).collect(Collectors.toList());
+                        Object instance = ClassUtils.newGenericInstance(field);
+                        Map<Field, String> fieldMap = Arrays.asList(instance.getClass().getDeclaredFields())
+                                                            .stream()
+                                                            .filter(f -> f.getAnnotation(metaAnnotation) != null)
+                                                            .map(f -> new Object[] {f, changeAnnotationValue(f.getAnnotation(metaAnnotation), "expr", getAnnotationValue(f.getAnnotation(metaAnnotation), "expr").toString().replace("[i]", "["+idx+"]"))})
+                                                            .collect(Collectors.toMap(k -> (Field) k[0], v -> (String) v[1]));
+                        list.add(inject(metadata, instance, metaAnnotation));
+                        fieldMap.entrySet()
+                                .stream()
+                                .map(e -> (String) changeAnnotationValue(e.getKey().getAnnotation(metaAnnotation), "expr", e.getValue()))
+                                .collect(Collectors.toList());
                     }
                     return (T) list;
                 }
             } else if(Map.class.isAssignableFrom(field.getType())) {
-                //System.out.println("field is Map - "+field.getGenericType());
-                Map map = this.metadata.<Map> getValue(expr);
+                Map map = metadata.<Map> getValue(expr);
                 for(Object key : map.keySet()) {
-                    Object instance = newInstance(getGenericClassName(field, 1));
-                    if(instance.getClass().getAnnotation(annotation) == null) {
+                    Object instance = ClassUtils.getGenericClassName(field, 1);
+                    if(instance.getClass().getAnnotation(metaAnnotation) == null) {
                         break;
                     } else {
-                        map.put(key, inject(instance, annotation));
+                        map.put(key, inject(metadata, instance, metaAnnotation));
                     }
                 }
                 return (T) map;
             } else {
-                //System.out.println("primitive or non-generic");                
-                return this.metadata.<T> getValue((String) expr);
+                return metadata.<T> getValue((String) expr);
             }
-        } else if(obj instanceof Method) {
-            //Not implemented yet.
         } else {
-            //System.out.println("it's Object");
             Field[] fields = obj.getClass().getDeclaredFields();
             for(Field field : fields) {
                 field.setAccessible(true);
-                field.set(obj, inject(field, annotation));
+                field.set(obj, inject(metadata, field, metaAnnotation));
+            }
+            Method[] methods = obj.getClass().getDeclaredMethods();
+            for(Method method : methods) {
+                method.setAccessible(true);
+                Annotation[][] annotations = method.getParameterAnnotations();
+                List<Object> params = new ArrayList<>();
+                for(int i=0; i<annotations.length; i++) {
+                    Annotation[] anno = annotations[i];
+                    if(anno.length > 0) {
+                        Object value = metadata.<Object> getValue((String) getAnnotationValue(anno[0], "expr"));
+                        if(method.getParameterTypes()[i].isAssignableFrom(value.getClass()) || method.getParameterTypes()[i].isPrimitive()) {
+                            params.add(value);
+                        } else {
+                            throw new IllegalArgumentException("Metadata type is not matching with parameter type. Parameter type: "+method.getParameterTypes()[i].getName()+"   Metadata type: "+value.getClass().getName());
+                        }
+                    } else {
+                        params.add(method.getParameterTypes()[i].isPrimitive() ? 0 : null);
+                    }
+                }
+                Arrays.asList(params).stream().forEach(a -> System.out.println(a));
+                System.out.println(method.getName());
+                method.invoke(obj, params.toArray());
             }
             return obj;
-        }
-        throw new IllegalArgumentException("Not supported object type: "+obj.getClass().getName());
-    }
-
-    /**
-     * Get generic class name first element of field
-     * @param field
-     * @return
-     */
-    public String getFirstGenericClassName(Field field) {
-        return getGenericClassName(field, 0);
-    }
-
-    /**
-     * Get generic class name of field with argument index
-     * @param field
-     * @param argsIdx
-     * @return
-     */
-    public String getGenericClassName(Field field, int argsIdx) {
-        return getGenericClassName(field).get(argsIdx);
-    }
-
-    /**
-     * Get generic class name of Field
-     * @param field
-     * @return
-     */
-    public List<String> getGenericClassName(Field field) {
-        ParameterizedType pType = (ParameterizedType) field.getGenericType();
-        return Arrays.asList(pType.getActualTypeArguments()).stream().map(t -> ((Class<?>) t).getName()).collect(Collectors.toList());
-    }
-
-    /**
-     * Create instance of generic type of specified Field
-     * @param <T>
-     * @param field
-     * @return
-     */
-    public Object newGenericInstance(Field field) {
-        return newInstance(getFirstGenericClassName(field));
-    }
-
-    /**
-     * Create instance with specified class name
-     * @param <T>
-     * @param classname
-     * @return
-     */
-    public Object newInstance(String classname) {
-        Class<?> clazz;
-        try {
-            clazz = Class.forName(classname);
-            Constructor<?> constructor = clazz.getConstructor(new Class<?>[0]);
-            return constructor.newInstance(new Object[0]);
-        } catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            throw new RuntimeException(e);
         }
     }
 
@@ -156,10 +128,9 @@ public class MetaInjector {
      * @param key
      * @return
      */
-    public Object getValue(Annotation annotation, String key) {
-        Method method;
+    public static Object getAnnotationValue(Annotation annotation, String key) {
         try {
-            method = annotation.getClass().getDeclaredMethod(key, new Class<?>[0]);
+            Method method = annotation.getClass().getDeclaredMethod(key, new Class<?>[0]);
             return method.invoke(annotation, new Object[0]);
         } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             throw new RuntimeException(e);
@@ -174,11 +145,14 @@ public class MetaInjector {
      * @return
      */
     @SuppressWarnings("unchecked")
-    public Object changeAnnotationValue(Annotation annotation, String key, Object newValue) {
+    public static Object changeAnnotationValue(Annotation annotation, String key, Object newValue) {
         Object handler = Proxy.getInvocationHandler(annotation);
-        Field field;
         try {
-            field = handler.getClass().getDeclaredField("memberValues");
+            if (!MetaInjector.class.getModule().isNamed()) {
+                Console.class.getModule().addOpens(Console.class.getPackageName(), MetaInjector.class.getModule());
+            }
+            Field field = handler.getClass().getDeclaredField("memberValues");
+            //field.setAccessible(true);
             field.setAccessible(true);
             Map<String, Object> memberValues = (Map<String, Object>) field.get(handler);
             Object oldValue = memberValues.get(key);
@@ -190,5 +164,6 @@ public class MetaInjector {
         } catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
-    }    
+    }
 }
+

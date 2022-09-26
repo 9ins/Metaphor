@@ -35,6 +35,11 @@ public class MetaStore {
     Map<String, Object> metadata;    
 
     /**
+     * Metadata manager object
+     */
+    MetaManager metaManager;
+
+    /**
      * Constructs with meta path string
      * @param metaFile
      */
@@ -56,9 +61,9 @@ public class MetaStore {
      */
     public MetaStore(File metaFile) {
         if(metaFile.isDirectory()) {
-            throw new IllegalArgumentException("Metadata file cannot be directory!!!");
+            throw new IllegalArgumentException("Metadata file cannot be directory - "+metaFile.getAbsolutePath());
         } else if(!metaFile.exists()) {
-            throw new IllegalArgumentException("Metadata file not exist!!!");
+            throw new IllegalArgumentException("Metadata file not exist - "+metaFile.getName());
         }
         this.metaFile = metaFile;        
         this.metadata = load(metaFile);
@@ -69,7 +74,7 @@ public class MetaStore {
      * @throws NotSupportedException
      * @throws IOException
      */
-    public Map<String, Object> load(File metaFile) {
+    private synchronized Map<String, Object> load(File metaFile) {
         String metaName = metaFile.getName();
         String metaExt = metaName.substring(metaName.lastIndexOf(".")+1);
         String metaString;
@@ -78,20 +83,24 @@ public class MetaStore {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        if(metaExt.equalsIgnoreCase(META_EXT.YAML.name()) 
-                || metaExt.equalsIgnoreCase(META_EXT.YML.name())) {
+        if(metaExt.equalsIgnoreCase(META_EXT.YAML.name()) || metaExt.equalsIgnoreCase(META_EXT.YML.name())) {
             return new Yaml().<Map<String, Object>> load(metaString);
         } else if(metaExt.equalsIgnoreCase(META_EXT.JSON.name())) {
             return new Gson().<Map<String, Object>> fromJson(metaString, Map.class);
-        } else if(metaExt.equalsIgnoreCase(META_EXT.PROPERTIES.name()) 
-                || metaExt.equalsIgnoreCase(META_EXT.CONFIG.name()) 
-                || metaExt.equalsIgnoreCase(META_EXT.CONF.name())) {
+        } else if(metaExt.equalsIgnoreCase(META_EXT.PROPERTIES.name()) || metaExt.equalsIgnoreCase(META_EXT.CONFIG.name()) || metaExt.equalsIgnoreCase(META_EXT.CONF.name())) {
             return Arrays.asList(metaString.split(System.lineSeparator()))
                          .stream().map(l -> new Object[]{l.substring(0, l.indexOf("=")).trim(), l.substring(l.indexOf("=")+1).trim()})
                          .collect(Collectors.toMap(k -> (String)k[0], v -> v[1]));
         } else {
             throw new IllegalArgumentException("Metadata file extention not supported: "+metaName);
-        }    
+        }
+    }
+
+    /**
+     * Reload metadata
+     */
+    public void reload() {
+        load(this.metaFile);
     }
 
     /**
@@ -148,7 +157,7 @@ public class MetaStore {
      */
     public <V> void setValue(String expr, V value) {
         MetaStructureOpr.<V> setValue(this.metadata, expr, value);
-        //System.out.println(this.getClass().getCanonicalName()+"="+Chart.class.getCanonicalName());
+        this.metaManager.dispatchMetaEvent(EVENT_TYPE.MODIFIED, new MetaEvent<V> (this, this.metaFile, expr, value));
     }
 
     /**
@@ -168,6 +177,7 @@ public class MetaStore {
         } else {
             throw new RuntimeException("Parent  type is wrong. Metadata structure failed: "+parent);
         }
+        this.metaManager.dispatchMetaEvent(EVENT_TYPE.CREATED, new MetaEvent<V> (this, this.metaFile, expr, value));
     }
 
     /**
@@ -188,6 +198,7 @@ public class MetaStore {
         } else {
             throw new RuntimeException("Parent data type is wired. Context data structure failed: "+parent);
         }
+        this.metaManager.dispatchMetaEvent(EVENT_TYPE.REMOVED, new MetaEvent<V> (this, this.metaFile, expr, value));
         return value;
     }
 
@@ -209,6 +220,22 @@ public class MetaStore {
      */
     public Map<String, Object> getMetadata() {
         return this.metadata;
+    }
+
+    /**
+     * Get metadata manager
+     * @return
+     */
+    public MetaManager getMetaManager() {
+        return this.metaManager;
+    }
+
+    /**
+     * Set metadata manager
+     * @param metaManager
+     */
+    public void setMetaManager(MetaManager metaManager) {
+        this.metaManager = metaManager;
     }
 
     @Override

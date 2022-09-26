@@ -10,11 +10,10 @@ import java.util.EventObject;
  * @author 9ins
  */
 public class MetaEvent <T> extends EventObject {
-
     /**
      * Metadata file Path
      */
-    Path metadataFile;
+    File metadataFile;
 
     /**
      * Metadata expression
@@ -33,19 +32,19 @@ public class MetaEvent <T> extends EventObject {
      * @param expr
      * @param metadataValue
      */
-    public MetaEvent(Object eventSource, Path metadataFile, String expr, T metadataValue) {
+    public MetaEvent(Object eventSource, File metadataFile, String expr, T metadataValue) {
         super(eventSource);
         this.expr = expr;
         this.metadataFile = metadataFile;
-        this.metadataValue = metadataValue;        
+        this.metadataValue = metadataValue;
     }
 
     /**
      * Get metadata File
      * @return
      */
-    public File getMetaFile() {
-        return this.metadataFile.toFile();
+    public Path getMetaPath() {
+        return this.metadataFile.toPath();
     }
 
     /**

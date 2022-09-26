@@ -11,5 +11,6 @@ public class MetadataTest {
     public void loadTest() throws IOException {
         MetaStore metadata = new MetaStore(Paths.get("D:/0.github/Leap/config/hosts.yml"));
         System.out.println(metadata.toString());
-    }    
+    }
 }
+

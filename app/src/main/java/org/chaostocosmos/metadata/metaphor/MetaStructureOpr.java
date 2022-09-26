@@ -35,8 +35,9 @@ public class MetaStructureOpr {
 			return (T) obj;
 		}
 		if(obj instanceof List) {
-			List<T> l = (List<T>) obj;			
-			int idx = Integer.valueOf(StringTools.substringBetweenFirst(String.valueOf(keys[0]), '[', ']'));			
+			List<T> l = (List<T>) obj;
+			String s = StringTools.substringBetweenFirst(String.valueOf(keys[0]), '[', ']');			
+			int idx = s.equals("i") ? 0 : Integer.valueOf(s);
 			return findValue(l.get(idx), Arrays.copyOfRange(keys, 1, keys.length));
 		} else if(obj instanceof Map) {
 			Map<String, T> m = (Map<String, T>) obj;

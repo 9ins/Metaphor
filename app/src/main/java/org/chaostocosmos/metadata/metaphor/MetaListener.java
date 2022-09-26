@@ -1,11 +1,13 @@
 package org.chaostocosmos.metadata.metaphor;
 
+import java.util.EventListener;
+
 /**
  * Metadata listener
  * 
  * @author 9ins
  */
-public interface MetaListener {
+public interface MetaListener extends EventListener {
 
     /**
      * When metadata injected to object field. 
@@ -18,7 +20,7 @@ public interface MetaListener {
      * When metadata changed 
      * @param e
      */
-    public <T> void metadataChanged(MetaEvent<T> e);
+    public <T> void metadataModified(MetaEvent<T> e);
     
     /**
      * When metadata removed
