@@ -13,6 +13,9 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
+import org.chaostocosmos.metadata.metaphor.enums.EVENT_TYPE;
+import org.chaostocosmos.metadata.metaphor.enums.META_EXT;
+import org.chaostocosmos.metadata.metaphor.event.MetaEvent;
 import org.yaml.snakeyaml.Yaml;
 
 import com.google.gson.Gson;

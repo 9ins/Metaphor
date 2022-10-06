@@ -80,11 +80,12 @@ public class ClassUtils {
      * @param classname
      * @return
      */
-    public static Object newInstance(String classname) {
+    @SuppressWarnings("unchecked")
+    public static <T> T newInstance(String classname) {
         try {
             Class<?> clazz = Class.forName(classname);
             Constructor<?> constructor = clazz.getConstructor(new Class<?>[0]);
-            return constructor.newInstance(new Object[0]);
+            return (T) constructor.newInstance(new Object[0]);
         } catch (ClassNotFoundException 
                | NoSuchMethodException 
                | SecurityException 

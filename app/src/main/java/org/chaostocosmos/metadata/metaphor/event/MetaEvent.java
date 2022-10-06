@@ -1,4 +1,4 @@
-package org.chaostocosmos.metadata.metaphor;
+package org.chaostocosmos.metadata.metaphor.event;
 
 import java.io.File;
 import java.nio.file.Path;

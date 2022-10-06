@@ -2,33 +2,33 @@ package org.chaostocosmos.metadata.metaphor;
 
 import java.util.List;
 
+import org.chaostocosmos.metadata.metaphor.annotation.MetaWired;
+
 /**
  * User
  * 
  * @author 9ins
  */
+@MetaWired(expr = "hosts[0].users[0]")
 public class User {
     
-    @MetaField(expr = "hosts[0].users[i].username")
     String username;
 
-    @MetaField(expr = "hosts[0].users[i].password")
     String password;
 
     double doubleValue;
 
     List<String> name;
 
-    long grant;
+    String grant;
 
-    String pass;
+    String host;
 
-    long port;
+    int port;
     
-    public void setUser(@MetaParameter(expr = "hosts[0].users") List<String> name, String pass, long port, @MetaParameter(expr = "hosts[0].port") long grant) {
+    public void setUser(@MetaWired(expr = "hosts[1].users") List<String> name, String host, int port) {
         this.name = name;
-        this.grant = grant;
-        this.pass = pass;
+        this.host = host;
         this.port = port;
     }
 
@@ -41,7 +41,7 @@ public class User {
             ", doubleValue='" + doubleValue + "'" +
             ", name='" + name + "'" +
             ", grant='" + grant + "'" +
-            ", pass='" + pass + "'" +
+            ", host='" + host + "'" +
             "}";
     }
 }

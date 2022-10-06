@@ -8,30 +8,52 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import org.chaostocosmos.metadata.metaphor.annotation.MetaWired;
 
 /**
  * MetadataInjector
  * 
  * @author 9ins
  */
-public class MetaInjector {
+public class MetaInjector <T> {
     /**
-     * Inject meta data to object field
-     * @param <T>
-     * @param metadata
-     * @param obj
-     * @return
-     * @throws IllegalArgumentException
-     * @throws IllegalAccessException
-     * @throws InvocationTargetException
-     * @throws SecurityException
-     * @throws NoSuchMethodException
+     * Object to be injected
      */
-    public static <T> T injectMetaField(MetaStore metadata, T obj) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
-        return inject(metadata, obj, MetaField.class);
+    T obj;
+
+    /**
+     * Constructs with object being injected.
+     * @param obj
+     */
+    public MetaInjector(T obj) {
+        this.obj = obj;
+    }    
+
+    /**
+     * Inject meta data to object
+     * @param metaStore
+     * @return
+     */
+    public T inject(MetaStore metaStore) {
+        return inject(metaStore, MetaWired.class);
+    }
+
+    /**
+     * Inject meta data to object
+     * @param metaStore
+     * @return
+     */
+    public T inject(MetaStore metaStore, Class<? extends MetaWired> metaAnnotation) {
+        try {
+            return inject(metaStore, this.obj, metaAnnotation);
+        } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -41,17 +63,22 @@ public class MetaInjector {
      * @param obj
      * @param metaAnnotation
      * @return
-     * @throws IllegalArgumentException
      * @throws IllegalAccessException
+     * @throws IllegalArgumentException
      * @throws InvocationTargetException
      */
     @SuppressWarnings("unchecked")
-    public static <T> T inject(MetaStore metadata, T obj, Class<? extends Annotation> metaAnnotation) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
+    public T inject(MetaStore metadata, Object obj, Class<? extends MetaWired> metaAnnotation) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
         if(obj instanceof Field) {
             Field field = (Field) obj;
             Annotation annotation2 = field.getAnnotation(metaAnnotation);
-            if(annotation2 == null) {
-                return (T) (field.getType().isPrimitive() ? 0L : null);
+            if(annotation2 == null) {                
+                MetaWired meta = field.getDeclaringClass().getAnnotation(metaAnnotation);
+                try {
+                    return metadata.<T> getValue(meta.expr()+"."+field.getName());
+                } catch(Exception e) {
+                    return (T) (field.getType().isPrimitive() ? 0 : null);
+                }
             }
             String expr = (String) getAnnotationValue(annotation2, "expr");
             if(List.class.isAssignableFrom(field.getType())) {
@@ -93,32 +120,31 @@ public class MetaInjector {
         } else {
             Field[] fields = obj.getClass().getDeclaredFields();
             for(Field field : fields) {
-                field.setAccessible(true);
+                field.setAccessible(true);                
                 field.set(obj, inject(metadata, field, metaAnnotation));
             }
             Method[] methods = obj.getClass().getDeclaredMethods();
             for(Method method : methods) {
                 method.setAccessible(true);
-                Annotation[][] annotations = method.getParameterAnnotations();
-                List<Object> params = new ArrayList<>();
-                for(int i=0; i<annotations.length; i++) {
-                    Annotation[] anno = annotations[i];
-                    if(anno.length > 0) {
-                        Object value = metadata.<Object> getValue((String) getAnnotationValue(anno[0], "expr"));
-                        if(method.getParameterTypes()[i].isAssignableFrom(value.getClass()) || method.getParameterTypes()[i].isPrimitive()) {
-                            params.add(value);
-                        } else {
-                            throw new IllegalArgumentException("Metadata type is not matching with parameter type. Parameter type: "+method.getParameterTypes()[i].getName()+"   Metadata type: "+value.getClass().getName());
-                        }
-                    } else {
-                        params.add(method.getParameterTypes()[i].isPrimitive() ? 0 : null);
-                    }
-                }
-                Arrays.asList(params).stream().forEach(a -> System.out.println(a));
-                System.out.println(method.getName());
+                List<Object> params = Arrays.asList(method.getParameters())
+                                            .stream()
+                                            .map(p -> {
+                                                MetaWired a = p.getAnnotation(metaAnnotation);
+                                                if(a != null) {
+                                                    Object value = metadata.<Object> getValue((String) getAnnotationValue(a, "expr"));
+                                                    if(p.getType().isAssignableFrom(value.getClass()) || p.getType().isPrimitive()) {                                                                                                        
+                                                        return value;
+                                                    } else {
+                                                        throw new IllegalArgumentException("Metadata type is not matching with parameter type. Parameter type: "+p.getType().getName()+"   Metadata type: "+value.getClass().getName());
+                                                    }    
+                                                } else {
+                                                    MetaWired ma = method.getAnnotation(metaAnnotation);
+                                                    return p.getType().isPrimitive() ? 0 : null;   
+                                                }
+                                            }).collect(Collectors.toList());
                 method.invoke(obj, params.toArray());
             }
-            return obj;
+            return (T) obj;
         }
     }
 

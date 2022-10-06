@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import org.chaostocosmos.metadata.metaphor.annotation.MetaWired;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -27,13 +28,13 @@ public class MetaHelperTest {
     }
     
     @Test
-    public static String testAnnotationParam(@MetaParameter(expr = "hosts[0].users[0].username") String s) {
+    public static String testAnnotationParam(@MetaWired(expr = "hosts[0].users[0].username") String s) {
         System.out.println(s);
         return s;
     }
 
     public static void main(String[] args) throws IllegalArgumentException, IllegalAccessException {
-        testAnnotationParam("");
+        testAnnotationParam(null);
     }
 }
 

@@ -3,11 +3,14 @@ package org.chaostocosmos.metadata.metaphor;
 import java.io.File;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import org.chaostocosmos.metadata.metaphor.annotation.MetaWired;
 
 /**
  * Metadata helper object
@@ -58,8 +61,6 @@ public class MetaHelper {
      * @param <T>
      * @param clazz
      * @return
-     * @throws IllegalAccessException
-     * @throws IllegalArgumentException
      */
     public static <T> T get(File metaStoreFile, Class<T> clazz) {
         if(!metaStoreFile.exists() || metaStoreFile.isDirectory()) {
@@ -74,11 +75,9 @@ public class MetaHelper {
      * @param metaStore
      * @param clazz
      * @return
-     * @throws IllegalArgumentException
-     * @throws IllegalAccessException
      */
     public static <T> T get(MetaStore metaStore, Class<T> clazz) {
-        return get(metaStore, clazz, MetaField.class);
+        return get(metaStore, clazz, MetaWired.class);
     }
 
     /**
@@ -88,22 +87,31 @@ public class MetaHelper {
      * @param clazz
      * @param annotation
      * @return
-     * @throws SecurityException
-     * @throws NoSuchMethodException
-     * @throws InvocationTargetException
-     * @throws IllegalArgumentException
-     * @throws IllegalAccessException
      */
-    @SuppressWarnings("unchecked")
     public static <T> T get(MetaStore metaStore, Class<T> clazz, Class<? extends Annotation> annotation) {        
-        try {
-            if(isAnnotatedClass(clazz, annotation)) {
-                return (T) MetaInjector.inject(metaStore, ClassUtils.newInstance(clazz.getName()), annotation);
-            }
-            return null;
-        } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
-            throw new RuntimeException(e);
+        if(isAnnotatedClass(clazz, annotation)) {
+            return new MetaInjector<T>(ClassUtils.<T> newInstance(clazz.getName())).inject(metaStore);
         }
+        return null;
+    }
+
+    /**
+     * Invoke meta specified method
+     * @param metaStore
+     * @param object
+     * @param methodName
+     * @param exprs
+     * @return
+     * @throws NoSuchMethodException
+     * @throws SecurityException
+     * @throws IllegalAccessException
+     * @throws IllegalArgumentException
+     * @throws InvocationTargetException
+     */
+    public static Object invokeMetaMethod(MetaStore metaStore, Object object, String methodName, String[] exprs) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        Method method = object.getClass().getDeclaredMethod(methodName);
+        Object[] params = Arrays.asList(exprs).stream().map(expr -> metaStore.getValue(expr)).toArray();
+        return method.invoke(object, params);
     }
 
     /**

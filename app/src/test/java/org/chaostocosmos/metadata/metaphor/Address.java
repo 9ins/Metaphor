@@ -1,8 +1,10 @@
 package org.chaostocosmos.metadata.metaphor;
 
+import org.chaostocosmos.metadata.metaphor.annotation.MetaWired;
+
 public class Address {
 
-    @MetaField(expr = "hosts[0].resources.streaming-buffer-size")
+    @MetaWired(expr = "hosts[0].resources.streaming-buffer-size")
     int port;
 
     @Override

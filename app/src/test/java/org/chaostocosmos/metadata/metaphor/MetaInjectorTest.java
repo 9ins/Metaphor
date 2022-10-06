@@ -6,6 +6,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Paths;
 import java.util.List;
 
+import org.chaostocosmos.metadata.metaphor.event.MetaEvent;
+import org.chaostocosmos.metadata.metaphor.event.MetaListener;
 import org.junit.jupiter.api.Test; 
 
 public class MetaInjectorTest implements MetaListener {
@@ -15,7 +17,7 @@ public class MetaInjectorTest implements MetaListener {
     @Test
     public static void testInject() throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, SecurityException {
         MetaTest obj = new MetaTest();
-        obj = (MetaTest) MetaInjector.inject(metaStorage.getMetaStore("hosts.yml"), obj, MetaField.class);
+        obj = new MetaInjector<MetaTest>(obj).inject(metaStorage.getMetaStore("hosts.yml"));
         System.out.println(obj.toString());
         List<User> users = obj.getUsers();
         System.out.println(users.get(0).username);
@@ -24,8 +26,14 @@ public class MetaInjectorTest implements MetaListener {
     @Test
     public static void testInject2() throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, SecurityException {
         MetaTest obj = new MetaTest();
-        obj = MetaInjector.inject(metaStorage.getMetaStore("hosts.yml"), obj, MetaField.class);
+        obj = new MetaInjector<MetaTest>(obj).inject(metaStorage.getMetaStore("hosts.yml"));
         System.out.println(obj);
+    }
+
+    public static void testInject3() {
+        User user = new User();
+        user = new MetaInjector<User>(user).inject(metaStorage.getMetaStore("hosts.yml"));
+        System.out.println(user);
     }
 
     public static void save() throws IOException {
@@ -54,6 +62,6 @@ public class MetaInjectorTest implements MetaListener {
     }
 
     public static void main(String[] args) throws Exception {
-        testInject2();
+        testInject3();
     }   
 }

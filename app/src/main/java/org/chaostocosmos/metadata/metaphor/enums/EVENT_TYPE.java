@@ -1,4 +1,4 @@
-package org.chaostocosmos.metadata.metaphor;
+package org.chaostocosmos.metadata.metaphor.enums;
 
 /**
  * Metadata event type
