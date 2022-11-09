@@ -2,20 +2,19 @@ package org.chaostocosmos.metadata.metaphor;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileNotFoundException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import org.chaostocosmos.metadata.metaphor.enums.EVENT_TYPE;
 import org.chaostocosmos.metadata.metaphor.enums.META_EXT;
-import org.chaostocosmos.metadata.metaphor.event.MetaEvent;
-import org.chaostocosmos.metadata.metaphor.event.MetaListener;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
 /**
  * MetadataContext
@@ -34,14 +33,19 @@ public class MetaManager {
     Map<Path, MetaStore> metadataMap;
 
     /**
-     * Metadata listener list
-     */
-    List<MetaListener> metadataListeners;
-
-    /**
      * MetaManager instance
      */
     private static MetaManager metaManager;
+
+    /**
+     * Get MetaManager instance
+     * @param resourcePath
+     * @return
+     * @throws URISyntaxException
+     */
+    public static MetaManager get(String resourcePath) throws URISyntaxException {
+        return get(new File(ClassLoader.getSystemClassLoader().getResource(resourcePath).toURI()).toPath());
+    }
 
     /**
      * Get MetaManager instance
@@ -69,19 +73,26 @@ public class MetaManager {
      */
     private MetaManager(Path metadataDir) {
         this.metadataDir = metadataDir;
+        this.metadataMap = new HashMap<>();
         if(!metadataDir.toFile().isDirectory()) {
             throw new IllegalArgumentException("Metadata path must be directory!!!");
         }
-        this.metadataListeners = new ArrayList<>();
-        load();
+        try {
+            load();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         disableAccessWarnings();
     }
 
     /**
      * Load metadata files
+     * @throws JsonProcessingException
+     * @throws JsonMappingException
+     * @throws FileNotFoundException
      */
-    private synchronized void load() {
-        this.metadataMap = Stream.of(this.metadataDir.toFile().listFiles(new FileFilter() {
+    private synchronized void load() throws JsonMappingException, JsonProcessingException, FileNotFoundException {
+        File[] files = this.metadataDir.toFile().listFiles(new FileFilter() {
             @Override
             public boolean accept(File pathname) {
                 String ext = pathname.getName().substring(pathname.getName().lastIndexOf(".")+1);
@@ -95,17 +106,21 @@ public class MetaManager {
                     || ext.equalsIgnoreCase(META_EXT.YAML.name())
                     );
             }            
-        })).map( f -> {
-            MetaStore ms = new MetaStore(f);
+        });
+        for(File file : files) {
+            MetaStore ms = new MetaStore(file);
             ms.setMetaManager(metaManager);
-            return new Object[]{f.toPath(), ms};
-        }).collect(Collectors.toMap(k -> (Path)k[0], v -> (MetaStore)v[1]));
+            this.metadataMap.put(file.toPath(), ms);
+        }
     }
 
     /**
      * Reload all of meta store
+     * @throws JsonProcessingException
+     * @throws JsonMappingException
+     * @throws FileNotFoundException
      */
-    public void reload() {
+    public void reload() throws JsonMappingException, JsonProcessingException, FileNotFoundException {
         load();
     }
 
@@ -147,47 +162,6 @@ public class MetaManager {
      */
     public MetaStore getMetaStore(Path metaFile) {
         return this.metadataMap.get(metaFile);
-    }
-
-    /**
-     * Dispatch metadata event
-     * @param <T>
-     * @param eventType
-     * @param me
-     */
-    public <T> void dispatchMetaEvent(EVENT_TYPE eventType, MetaEvent<T> me) {
-        if(this.metadataListeners.size() > 0) {
-            switch(eventType) {
-                case INJECTED :
-                this.metadataListeners.stream().forEach(l -> l.metadataInjected(me));                
-                break;
-                case CREATED :
-                this.metadataListeners.stream().forEach(l -> l.metadataCreated(me));
-                break;
-                case REMOVED :
-                this.metadataListeners.stream().forEach(l -> l.metadataRemoved(me));
-                break;
-                case MODIFIED :
-                this.metadataListeners.stream().forEach(l -> l.metadataModified(me));
-                break;
-            }
-        }
-    }
-
-    /**
-     * Add metadata listener
-     * @param listener
-     */
-    public void addMetaListener(MetaListener listener) {
-        this.metadataListeners.add(listener);
-    }        
-
-    /**
-     * Remove metadata listener
-     * @param listener
-     */
-    public void removeListener(MetaListener listener) {
-        this.metadataListeners.remove(listener);
     }
 
     /**

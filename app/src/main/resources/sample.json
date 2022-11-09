@@ -1,0 +1,49 @@
+{
+    "users" : [
+        {
+            "name" : "john",
+            "nickname" : "Tiger",
+            "address" : "11th street, NewYork",
+            "phone" : "110144445555"            
+        },
+        {
+            "name" : "Tom",
+            "nickname" : "Lion",
+            "address" : "12th street, NewYork",
+            "phone" : "110133335555"            
+        },
+        {
+            "name" : "Jack",
+            "nickname" : "Rabbit",
+            "address" : "13th street, NewYork",
+            "phone" : "110166665555"            
+        }
+    ],
+    "iptables" : {
+        "server1" : "192.168.1.1",
+        "server2" : "192.168.1.2",
+        "server3" : "192.168.1.3",
+        "server4" : "192.168.1.4",
+        "server5" : "192.168.1.5,",
+        "cities" : [
+            "Tokyo",
+            "Seoul",
+            "Washington",
+            "Nabudabi"
+        ]
+    },
+    "products" : {
+        "Apple" : {
+            "stock" : 1000,
+            "reserved" : 10
+        },
+        "Banana" : {
+            "stock" : 3000,
+            "reserved" : 15
+        },
+        "Strowbarry" : {
+            "stock" : 8000,
+            "reserved" : 20
+        }
+    }
+}

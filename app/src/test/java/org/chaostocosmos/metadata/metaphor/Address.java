@@ -1,16 +1,42 @@
 package org.chaostocosmos.metadata.metaphor;
 
-import org.chaostocosmos.metadata.metaphor.annotation.MetaWired;
-
 public class Address {
 
-    @MetaWired(expr = "hosts[0].resources.streaming-buffer-size")
-    int port;
+    String country;
 
-    @Override
-    public String toString() {
-        return "{" +
-            " port='" + port + "'" +
-            "}";
+    String city;
+
+    int zipCode;
+
+    public Address() {
+        this.country = "Korea";
+        this.city = "Seoul";
+        this.zipCode = 8282;
     }
+    
+
+    public String getCountry() {
+        return this.country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return this.city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public int getZipCode() {
+        return this.zipCode;
+    }
+
+    public void setZipCode(int zipCode) {
+        this.zipCode = zipCode;
+    }
+
 }

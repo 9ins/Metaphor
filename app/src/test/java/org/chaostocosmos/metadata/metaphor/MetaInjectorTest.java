@@ -1,7 +1,5 @@
 package org.chaostocosmos.metadata.metaphor;
 
-import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Paths;
 import java.util.List;
@@ -12,38 +10,35 @@ import org.junit.jupiter.api.Test;
 
 public class MetaInjectorTest implements MetaListener {
 
-    public static MetaManager metaStorage = MetaManager.get(Paths.get("D:/0.github/Leap/config/"));
+    public MetaManager metaManager = MetaManager.get(Paths.get(""));
 
     @Test
-    public static void testInject() throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, SecurityException {
+    public void testInject() throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, SecurityException {
         MetaTest obj = new MetaTest();
-        obj = new MetaInjector<MetaTest>(obj).inject(metaStorage.getMetaStore("hosts.yml"));
+        obj = new MetaInjector<MetaTest>(obj).inject(metaManager.getMetaStore("sample.json"));
         System.out.println(obj.toString());
         List<User> users = obj.getUsers();
         System.out.println(users.get(0).username);
     }
 
     @Test
-    public static void testInject2() throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, SecurityException {
+    public void testInject2() throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, SecurityException {
         MetaTest obj = new MetaTest();
-        obj = new MetaInjector<MetaTest>(obj).inject(metaStorage.getMetaStore("hosts.yml"));
+        obj = new MetaInjector<MetaTest>(obj).inject(metaManager.getMetaStore("sample.json"));
         System.out.println(obj);
     }
 
-    public static void testInject3() {
+    public void testInject3() {
         User user = new User();
-        user = new MetaInjector<User>(user).inject(metaStorage.getMetaStore("hosts.yml"));
+        MetaStore metaStore = this.metaManager.getMetaStore("sample.json");
+        metaStore.addMetaListener(this);
+        user = new MetaInjector<User>(user).inject(metaStore);
         System.out.println(user);
     }
 
-    public static void save() throws IOException {
-        MetaStore metadata = metaStorage.getMetaStore("hosts.yml");
-        metadata.save(new File("D:/0.github/Leap/config/hosts.json"));
-    }
-
     @Override
-    public <T> void metadataInjected(MetaEvent<T> e) {
-        System.out.println(e.toString());        
+    public <T> void metadataInjected(MetaEvent<T> e) {        
+        System.out.println(e.toString());
     }
 
     @Override
@@ -62,6 +57,8 @@ public class MetaInjectorTest implements MetaListener {
     }
 
     public static void main(String[] args) throws Exception {
-        testInject3();
+        MetaInjectorTest test = new MetaInjectorTest();
+        test.testInject3();
     }   
 }
+

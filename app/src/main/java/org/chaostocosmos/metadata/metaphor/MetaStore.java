@@ -1,12 +1,14 @@
 package org.chaostocosmos.metadata.metaphor;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -16,10 +18,13 @@ import java.util.stream.Collectors;
 import org.chaostocosmos.metadata.metaphor.enums.EVENT_TYPE;
 import org.chaostocosmos.metadata.metaphor.enums.META_EXT;
 import org.chaostocosmos.metadata.metaphor.event.MetaEvent;
+import org.chaostocosmos.metadata.metaphor.event.MetaListener;
 import org.yaml.snakeyaml.Yaml;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
 
 /**
  * MetadataStorage
@@ -43,90 +48,82 @@ public class MetaStore {
     MetaManager metaManager;
 
     /**
-     * Constructs with meta path string
-     * @param metaFile
+     * Metadata listener list
      */
-    public MetaStore(String metaFile) {
-        this(Paths.get(metaFile));
-    }
+    List<MetaListener> metaListeners;
 
     /**
      * Constructs with meta file
      * @param metaFile
+     * @throws JsonProcessingException
+     * @throws JsonMappingException
+     * @throws FileNotFoundException
      */
-    public MetaStore(Path metaFile) {
+    public MetaStore(Path metaFile) throws JsonMappingException, JsonProcessingException, FileNotFoundException {
         this(metaFile.toFile());
+    }
+
+    /**
+     * Constructs with resource path
+     * @param resourcePath
+     * @throws URISyntaxException
+     * @throws JsonMappingException
+     * @throws JsonProcessingException
+     * @throws FileNotFoundException
+     */
+    public MetaStore(String resourcePath) throws URISyntaxException, JsonMappingException, JsonProcessingException, FileNotFoundException {
+        this(new File(ClassLoader.getSystemClassLoader().getResource(resourcePath).toURI()));
     }
 
     /**
      * Constructs with meta file path object
      * @param metaFile
+     * @throws JsonProcessingException
+     * @throws JsonMappingException
+     * @throws FileNotFoundException
      */
-    public MetaStore(File metaFile) {
-        if(metaFile.isDirectory()) {
+    public MetaStore(File metaFile) throws JsonMappingException, JsonProcessingException, FileNotFoundException {
+        if(!metaFile.exists()) {
+            throw new FileNotFoundException("Specified file not found: "+metaFile.toString());
+        } else if(metaFile.isDirectory()) {
             throw new IllegalArgumentException("Metadata file cannot be directory - "+metaFile.getAbsolutePath());
         } else if(!metaFile.exists()) {
             throw new IllegalArgumentException("Metadata file not exist - "+metaFile.getName());
         }
-        this.metaFile = metaFile;        
+        this.metaFile = metaFile;
+        this.metaListeners = new ArrayList<>();
         this.metadata = load(metaFile);
     }
 
     /**
      * Load metadata from file
+     * @throws JsonProcessingException
+     * @throws JsonMappingException
      * @throws NotSupportedException
      * @throws IOException
      */
-    private synchronized Map<String, Object> load(File metaFile) {
-        String metaName = metaFile.getName();
-        String metaExt = metaName.substring(metaName.lastIndexOf(".")+1);
-        String metaString;
-        try {
-            metaString = Files.readString(metaFile.toPath(), StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        if(metaExt.equalsIgnoreCase(META_EXT.YAML.name()) || metaExt.equalsIgnoreCase(META_EXT.YML.name())) {
-            return new Yaml().<Map<String, Object>> load(metaString);
-        } else if(metaExt.equalsIgnoreCase(META_EXT.JSON.name())) {
-            return new Gson().<Map<String, Object>> fromJson(metaString, Map.class);
-        } else if(metaExt.equalsIgnoreCase(META_EXT.PROPERTIES.name()) || metaExt.equalsIgnoreCase(META_EXT.CONFIG.name()) || metaExt.equalsIgnoreCase(META_EXT.CONF.name())) {
-            return Arrays.asList(metaString.split(System.lineSeparator()))
-                         .stream().map(l -> new Object[]{l.substring(0, l.indexOf("=")).trim(), l.substring(l.indexOf("=")+1).trim()})
-                         .collect(Collectors.toMap(k -> (String)k[0], v -> v[1]));
-        } else {
-            throw new IllegalArgumentException("Metadata file extention not supported: "+metaName);
-        }
+    @SuppressWarnings("unchecked")
+    private Map<String, Object> load(File metaStream) throws JsonMappingException, JsonProcessingException {
+        return MetaHelper.load(metaStream);
     }
 
     /**
      * Reload metadata
+     * @throws JsonProcessingException
+     * @throws JsonMappingException
      */
-    public void reload() {
+    public void reload() throws JsonMappingException, JsonProcessingException {
         load(this.metaFile);
     }
 
     /**
      * Save metadata to file
      * @param metaFile
+     * @param metadata
      * @throws IOException
      */
-    public void save(File metaFile) throws IOException {
-        String metaName = metaFile.getName();
-        String metaExt = metaName.substring(metaName.lastIndexOf(".")+1);
-        try(FileWriter writer = new FileWriter(metaFile)) {
-            if(metaExt.equalsIgnoreCase(META_EXT.YAML.name()) || metaExt.equalsIgnoreCase(META_EXT.YML.name())) {
-                new Yaml().dump(this.metadata, writer);
-            } else if(metaExt.equalsIgnoreCase(META_EXT.JSON.name())) {                
-                new GsonBuilder().setPrettyPrinting().create().toJson(this.metadata, writer);
-            } else if(metaExt.equalsIgnoreCase(META_EXT.PROPERTIES.name()) || metaExt.equalsIgnoreCase(META_EXT.CONFIG.name()) || metaExt.equalsIgnoreCase(META_EXT.CONF.name())) {
-                Properties properties = new Properties();
-                properties.putAll(this.metadata);
-                properties.store(writer, null);
-            } else {
-                throw new IllegalArgumentException("Metadata file extention not supported: "+metaName);
-            }
-        }
+    public <T> void save(File metaFile, T metadata) throws IOException {
+        MetaHelper.save(metaFile, metadata);
     }
 
     /**
@@ -160,7 +157,7 @@ public class MetaStore {
      */
     public <V> void setValue(String expr, V value) {
         MetaStructureOpr.<V> setValue(this.metadata, expr, value);
-        this.metaManager.dispatchMetaEvent(EVENT_TYPE.MODIFIED, new MetaEvent<V> (this, this.metaFile, expr, value));
+        dispatchMetaEvent(EVENT_TYPE.MODIFIED, new MetaEvent<V> (this, this.metaFile, expr, value));
     }
 
     /**
@@ -180,7 +177,7 @@ public class MetaStore {
         } else {
             throw new RuntimeException("Parent  type is wrong. Metadata structure failed: "+parent);
         }
-        this.metaManager.dispatchMetaEvent(EVENT_TYPE.CREATED, new MetaEvent<V> (this, this.metaFile, expr, value));
+        dispatchMetaEvent(EVENT_TYPE.CREATED, new MetaEvent<V> (this, this.metaFile, expr, value));
     }
 
     /**
@@ -201,12 +198,13 @@ public class MetaStore {
         } else {
             throw new RuntimeException("Parent data type is wired. Context data structure failed: "+parent);
         }
-        this.metaManager.dispatchMetaEvent(EVENT_TYPE.REMOVED, new MetaEvent<V> (this, this.metaFile, expr, value));
+        dispatchMetaEvent(EVENT_TYPE.REMOVED, new MetaEvent<V> (this, this.metaFile, expr, value));
         return value;
     }
 
     /**
      * Exists context value by specified expression
+     * @param expr
      */
     public boolean exists(String expr) {
         Object value = MetaStructureOpr.getValue(this.metadata, expr);
@@ -239,6 +237,47 @@ public class MetaStore {
      */
     public void setMetaManager(MetaManager metaManager) {
         this.metaManager = metaManager;
+    }
+
+    /**
+     * Add metadata listener
+     * @param metaListener
+     */
+    public void addMetaListener(MetaListener metaListener) {
+        this.metaListeners.add(metaListener);
+    }
+
+    /**
+     * Remove metadata listener
+     * @param metaListener
+     */
+    public void removeMetaListener(MetaListener metaListener) {
+        this.metaListeners.remove(metaListener);
+    }
+
+    /**
+     * Dispatch metadata event
+     * @param <T>
+     * @param eventType
+     * @param me
+     */
+    public synchronized <T> void dispatchMetaEvent(EVENT_TYPE eventType, MetaEvent<T> me) {
+        if(this.metaListeners.size() > 0) {
+            switch(eventType) {
+                case INJECTED :
+                this.metaListeners.stream().forEach(l -> l.metadataInjected(me));                
+                break;
+                case CREATED :
+                this.metaListeners.stream().forEach(l -> l.metadataCreated(me));
+                break;
+                case REMOVED :
+                this.metaListeners.stream().forEach(l -> l.metadataRemoved(me));
+                break;
+                case MODIFIED :
+                this.metaListeners.stream().forEach(l -> l.metadataModified(me));
+                break;
+            }
+        }
     }
 
     @Override

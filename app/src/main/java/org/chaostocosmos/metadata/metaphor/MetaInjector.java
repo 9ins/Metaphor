@@ -8,12 +8,13 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.chaostocosmos.metadata.metaphor.annotation.MetaWired;
+import org.chaostocosmos.metadata.metaphor.enums.EVENT_TYPE;
+import org.chaostocosmos.metadata.metaphor.event.MetaEvent;
 
 /**
  * MetadataInjector
@@ -50,7 +51,8 @@ public class MetaInjector <T> {
      */
     public T inject(MetaStore metaStore, Class<? extends MetaWired> metaAnnotation) {
         try {
-            return inject(metaStore, this.obj, metaAnnotation);
+            T obj = inject(metaStore, this.obj, metaAnnotation);
+            return obj;
         } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
             throw new RuntimeException(e);
         }
@@ -58,8 +60,9 @@ public class MetaInjector <T> {
 
     /**
      * Inject field value from MetaStore file mapping with specified annotation.
+     * 
      * @param <T>
-     * @param metadata
+     * @param metaStore
      * @param obj
      * @param metaAnnotation
      * @return
@@ -68,25 +71,27 @@ public class MetaInjector <T> {
      * @throws InvocationTargetException
      */
     @SuppressWarnings("unchecked")
-    public T inject(MetaStore metadata, Object obj, Class<? extends MetaWired> metaAnnotation) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
+    private T inject(MetaStore metaStore, Object obj, Class<? extends MetaWired> metaAnnotation) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
         if(obj instanceof Field) {
             Field field = (Field) obj;
             Annotation annotation2 = field.getAnnotation(metaAnnotation);
-            if(annotation2 == null) {                
+            if(annotation2 == null) {
                 MetaWired meta = field.getDeclaringClass().getAnnotation(metaAnnotation);
                 try {
-                    return metadata.<T> getValue(meta.expr()+"."+field.getName());
+                    return metaStore.<T> getValue(meta.expr()+"."+field.getName());
                 } catch(Exception e) {
                     return (T) (field.getType().isPrimitive() ? 0 : null);
                 }
             }
-            String expr = (String) getAnnotationValue(annotation2, "expr");
+            String expr = (String) getAnnotationValue(annotation2, "expr");            
             if(List.class.isAssignableFrom(field.getType())) {
                 if(field.getGenericType() == null) {
-                    return metadata.<T> getValue(expr);
+                    T value = metaStore.<T> getValue(expr);
+                    metaStore.dispatchMetaEvent(EVENT_TYPE.INJECTED, new MetaEvent<T> (this, metaStore.getMetaFile(), expr, (T) value));
+                    return value;
                 } else {
                     List list = new ArrayList<>();
-                    List src = metadata.<List> getValue(expr);
+                    List src = metaStore.<List> getValue(expr);
                     for(int i=0; i<src.size(); i++) {
                         final int idx = i;
                         Object instance = ClassUtils.newGenericInstance(field);
@@ -95,55 +100,63 @@ public class MetaInjector <T> {
                                                             .filter(f -> f.getAnnotation(metaAnnotation) != null)
                                                             .map(f -> new Object[] {f, changeAnnotationValue(f.getAnnotation(metaAnnotation), "expr", getAnnotationValue(f.getAnnotation(metaAnnotation), "expr").toString().replace("[i]", "["+idx+"]"))})
                                                             .collect(Collectors.toMap(k -> (Field) k[0], v -> (String) v[1]));
-                        list.add(inject(metadata, instance, metaAnnotation));
+                        list.add(inject(metaStore, instance, metaAnnotation));
                         fieldMap.entrySet()
                                 .stream()
                                 .map(e -> (String) changeAnnotationValue(e.getKey().getAnnotation(metaAnnotation), "expr", e.getValue()))
                                 .collect(Collectors.toList());
                     }
+                    metaStore.dispatchMetaEvent(EVENT_TYPE.INJECTED, new MetaEvent<T> (this, metaStore.getMetaFile(), expr, (T) list));
                     return (T) list;
                 }
             } else if(Map.class.isAssignableFrom(field.getType())) {
-                Map map = metadata.<Map> getValue(expr);
+                Map map = metaStore.<Map> getValue(expr);
                 for(Object key : map.keySet()) {
                     Object instance = ClassUtils.getGenericClassName(field, 1);
                     if(instance.getClass().getAnnotation(metaAnnotation) == null) {
                         break;
                     } else {
-                        map.put(key, inject(metadata, instance, metaAnnotation));
+                        map.put(key, inject(metaStore, instance, metaAnnotation));
                     }
                 }
+                metaStore.dispatchMetaEvent(EVENT_TYPE.INJECTED, new MetaEvent<T> (this, metaStore.getMetaFile(), expr, (T) map));
                 return (T) map;
             } else {
-                return metadata.<T> getValue((String) expr);
+                T value = metaStore.<T> getValue((String) expr);
+                metaStore.dispatchMetaEvent(EVENT_TYPE.INJECTED, new MetaEvent<T> (this, metaStore.getMetaFile(), expr, (T) value));
+                return value;
             }
         } else {
             Field[] fields = obj.getClass().getDeclaredFields();
             for(Field field : fields) {
                 field.setAccessible(true);                
-                field.set(obj, inject(metadata, field, metaAnnotation));
+                T value = inject(metaStore, field, metaAnnotation);
+                field.set(obj, value);
             }
             Method[] methods = obj.getClass().getDeclaredMethods();
-            for(Method method : methods) {
-                method.setAccessible(true);
-                List<Object> params = Arrays.asList(method.getParameters())
-                                            .stream()
-                                            .map(p -> {
-                                                MetaWired a = p.getAnnotation(metaAnnotation);
-                                                if(a != null) {
-                                                    Object value = metadata.<Object> getValue((String) getAnnotationValue(a, "expr"));
-                                                    if(p.getType().isAssignableFrom(value.getClass()) || p.getType().isPrimitive()) {                                                                                                        
-                                                        return value;
-                                                    } else {
-                                                        throw new IllegalArgumentException("Metadata type is not matching with parameter type. Parameter type: "+p.getType().getName()+"   Metadata type: "+value.getClass().getName());
-                                                    }    
-                                                } else {
-                                                    MetaWired ma = method.getAnnotation(metaAnnotation);
-                                                    return p.getType().isPrimitive() ? 0 : null;   
-                                                }
-                                            }).collect(Collectors.toList());
-                method.invoke(obj, params.toArray());
-            }
+            for(Method method : methods) {                
+                method.setAccessible(true);                
+                if(Arrays.asList(method.getParameters()).stream().anyMatch(p -> p.getAnnotation(MetaWired.class) != null)) {
+                    List<Object> params = Arrays.asList(method.getParameters())
+                    .stream()
+                    .map(p -> {
+                        MetaWired a = p.getAnnotation(metaAnnotation);
+                        if(a != null) {
+                            Object value = metaStore.<Object> getValue((String) getAnnotationValue(a, "expr"));
+                            metaStore.dispatchMetaEvent(EVENT_TYPE.INJECTED, new MetaEvent<T> (this, metaStore.getMetaFile(), a.expr(), (T) value));
+                            if(p.getType().isAssignableFrom(value.getClass()) || p.getType().isPrimitive()) {                                                                                                        
+                                return value;
+                            } else {
+                                throw new IllegalArgumentException("Metadata type is not matching with parameter type. Parameter type: "+p.getType().getName()+"   Metadata type: "+value.getClass().getName());
+                            }
+                        } else {
+                            MetaWired ma = method.getAnnotation(metaAnnotation);
+                            return p.getType().isPrimitive() ? 0 : null;   
+                        }
+                    }).collect(Collectors.toList());
+                    method.invoke(obj, params.toArray());
+                }
+            }            
             return (T) obj;
         }
     }
