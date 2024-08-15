@@ -9,13 +9,14 @@ import java.lang.annotation.Target;
           ElementType.FIELD, 
           ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
+
 /**
  * Config mapping for field
  * 
  * @author 9ins
  */
 public @interface MetaWired {
-
+    
     /**
      * Metadata path expression
      * @return

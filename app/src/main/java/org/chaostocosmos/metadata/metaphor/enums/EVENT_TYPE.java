@@ -10,14 +10,17 @@ public enum EVENT_TYPE {
      * Injected 
      */
     INJECTED, 
+
     /**
      * Created 
      */
     CREATED, 
+
     /**
      * Removed 
      */
     REMOVED, 
+    
     /**
      * Modified 
      */ 

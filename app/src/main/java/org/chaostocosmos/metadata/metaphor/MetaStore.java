@@ -2,29 +2,19 @@ package org.chaostocosmos.metadata.metaphor;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
-import java.util.stream.Collectors;
 
 import org.chaostocosmos.metadata.metaphor.enums.EVENT_TYPE;
-import org.chaostocosmos.metadata.metaphor.enums.META_EXT;
 import org.chaostocosmos.metadata.metaphor.event.MetaEvent;
 import org.chaostocosmos.metadata.metaphor.event.MetaListener;
-import org.yaml.snakeyaml.Yaml;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.javaprop.JavaPropsMapper;
 
 /**
  * MetadataStorage

@@ -82,7 +82,6 @@ public class MetaManager {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        disableAccessWarnings();
     }
 
     /**

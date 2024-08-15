@@ -2,7 +2,6 @@ package org.chaostocosmos.metadata.metaphor;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,6 +19,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
  * @author 9ins
  */
 public class MetaHelperTest {
+    
     @Test
     public static void testGet() throws URISyntaxException, JsonMappingException, JsonProcessingException {
         File metaFile = new File(ClassLoader.getSystemClassLoader().getResource("sample.json").toURI());
@@ -41,8 +41,8 @@ public class MetaHelperTest {
         this.s = s;
     }    
 
-    public static void main(String[] args) throws JsonMappingException, JsonProcessingException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, FileNotFoundException {
-        MetaStore metaStore = new MetaStore(new File("D:/0.github/Metaphor/hosts.yml"));
+    public static void main(String[] args) throws JsonMappingException, JsonProcessingException, FileNotFoundException, URISyntaxException {
+        MetaStore metaStore = new MetaStore("hosts.yml");
         MetaHelperTest test = MetaHelper.get(metaStore, MetaHelperTest.class);
         System.out.println(test.s);
     }

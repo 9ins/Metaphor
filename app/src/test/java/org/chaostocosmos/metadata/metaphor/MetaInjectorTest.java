@@ -1,6 +1,7 @@
 package org.chaostocosmos.metadata.metaphor;
 
 import java.lang.reflect.InvocationTargetException;
+import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -8,29 +9,30 @@ import org.chaostocosmos.metadata.metaphor.event.MetaEvent;
 import org.chaostocosmos.metadata.metaphor.event.MetaListener;
 import org.junit.jupiter.api.Test; 
 
-public class MetaInjectorTest implements MetaListener {
-
-    public MetaManager metaManager = MetaManager.get(Paths.get(""));
+public class MetaInjectorTest implements MetaListener {    
 
     @Test
-    public void testInject() throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, SecurityException {
+    public void testInject() throws URISyntaxException {
+        MetaManager metaManager = MetaManager.get("");
         MetaTest obj = new MetaTest();
-        obj = new MetaInjector<MetaTest>(obj).inject(metaManager.getMetaStore("sample.json"));
+        obj = new MetaInjector<MetaTest>(obj).inject(metaManager.getMetaStore("hosts.yml"));
         System.out.println(obj.toString());
         List<User> users = obj.getUsers();
         System.out.println(users.get(0).username);
     }
 
     @Test
-    public void testInject2() throws IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, SecurityException {
+    public void testInject2() throws URISyntaxException {
+        MetaManager metaManager = MetaManager.get("");        
         MetaTest obj = new MetaTest();
-        obj = new MetaInjector<MetaTest>(obj).inject(metaManager.getMetaStore("sample.json"));
+        obj = new MetaInjector<MetaTest>(obj).inject(metaManager.getMetaStore("hosts.yml"));
         System.out.println(obj);
     }
 
-    public void testInject3() {
+    public void testInject3() throws URISyntaxException {
+        MetaManager metaManager = MetaManager.get("");
         User user = new User();
-        MetaStore metaStore = this.metaManager.getMetaStore("sample.json");
+        MetaStore metaStore = metaManager.getMetaStore("sample.json");
         metaStore.addMetaListener(this);
         user = new MetaInjector<User>(user).inject(metaStore);
         System.out.println(user);
