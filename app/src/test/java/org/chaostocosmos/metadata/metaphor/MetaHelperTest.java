@@ -8,6 +8,8 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import org.chaostocosmos.metadata.metaphor.annotation.MetaWired;
+import org.chaostocosmos.metadata.metaphor.core.MetaHelper;
+import org.chaostocosmos.metadata.metaphor.core.MetaStore;
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -37,14 +39,14 @@ public class MetaHelperTest {
     String s;
     
     @Test
-    public void testAnnotationParam(@MetaWired(expr = "hosts[0].users[0].username") String s) {
+    public void testAnnotationParam(@MetaWired(expr = "hosts[0].users[1].username") String s) {
         this.s = s;
     }    
 
     public static void main(String[] args) throws JsonMappingException, JsonProcessingException, FileNotFoundException, URISyntaxException {
         MetaStore metaStore = new MetaStore("hosts.yml");
         MetaHelperTest test = MetaHelper.get(metaStore, MetaHelperTest.class);
-        System.out.println(test.s);
+        System.out.println(test.s);        
     }
 }
 

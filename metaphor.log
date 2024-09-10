@@ -1,0 +1,289 @@
+2024-08-23T10:40:00.840+09:00  INFO 1870363 --- [main] o.c.metadata.metaphor.api.MetaphorAPI    : Starting MetaphorAPI using Java 17.0.12 with PID 1870363 (/home/chaos/Github/Metaphor/app/build/classes/java/main started by chaos in /home/chaos/Github/Metaphor)
+2024-08-23T10:40:00.870+09:00  INFO 1870363 --- [main] o.c.metadata.metaphor.api.MetaphorAPI    : No active profile set, falling back to 1 default profile: "default"
+2024-08-23T10:40:02.688+09:00  INFO 1870363 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9999 (https)
+2024-08-23T10:40:02.710+09:00  INFO 1870363 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-08-23T10:40:02.712+09:00  INFO 1870363 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2024-08-23T10:40:02.827+09:00  INFO 1870363 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-08-23T10:40:02.828+09:00  INFO 1870363 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1874 ms
+2024-08-23T10:40:03.127+09:00  INFO 1870363 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : Autowired annotation is not supported on static fields: private static org.chaostocosmos.metadata.metaphor.api.component.PropertiesUtils org.chaostocosmos.metadata.metaphor.api.config.MIME.propertiesUtils
+2024-08-23T10:40:03.789+09:00  INFO 1870363 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2da81754, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1f992a3a, org.springframework.security.web.context.SecurityContextHolderFilter@66f5a02e, org.springframework.security.web.header.HeaderWriterFilter@32091c14, org.springframework.security.web.authentication.logout.LogoutFilter@673e76b3, org.chaostocosmos.metadata.metaphor.api.component.JwtRequestFilter@7a3e5cd3, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7e87ef9e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@33feda48, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@30bf26df, org.springframework.security.web.session.SessionManagementFilter@7c1a8f0f, org.springframework.security.web.access.ExceptionTranslationFilter@4391a2d8, org.springframework.security.web.access.intercept.AuthorizationFilter@433d9680]
+2024-08-23T10:40:04.400+09:00  INFO 1870363 --- [main] o.a.t.util.net.NioEndpoint.certificate   : Connector [https-jsse-nio-9999], TLS virtual host [_default_], certificate type [UNDEFINED] configured from [/home/chaos/.keystore] using alias [springboot] and with trust store [null]
+2024-08-23T10:40:04.418+09:00  INFO 1870363 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9999 (https) with context path ''
+2024-08-23T10:40:04.430+09:00  INFO 1870363 --- [main] o.c.metadata.metaphor.api.MetaphorAPI    : Started MetaphorAPI in 4.188 seconds (process running for 4.643)
+2024-08-23T10:47:38.498+09:00  INFO 1885306 --- [main] o.c.metadata.metaphor.api.MetaphorAPI    : Starting MetaphorAPI using Java 17.0.12 with PID 1885306 (/home/chaos/Github/Metaphor/app/build/classes/java/main started by chaos in /home/chaos/Github/Metaphor)
+2024-08-23T10:47:38.503+09:00  INFO 1885306 --- [main] o.c.metadata.metaphor.api.MetaphorAPI    : No active profile set, falling back to 1 default profile: "default"
+2024-08-23T10:47:39.991+09:00  INFO 1885306 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9999 (https)
+2024-08-23T10:47:40.005+09:00  INFO 1885306 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-08-23T10:47:40.006+09:00  INFO 1885306 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2024-08-23T10:47:40.081+09:00  INFO 1885306 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-08-23T10:47:40.082+09:00  INFO 1885306 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1514 ms
+2024-08-23T10:47:40.235+09:00  INFO 1885306 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : Autowired annotation is not supported on static fields: private static org.chaostocosmos.metadata.metaphor.api.component.PropertiesUtils org.chaostocosmos.metadata.metaphor.api.config.MIME.propertiesUtils
+2024-08-23T10:47:40.713+09:00  INFO 1885306 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@3a8cea24, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1eb9a3ef, org.springframework.security.web.context.SecurityContextHolderFilter@2f677247, org.springframework.security.web.header.HeaderWriterFilter@1e5eb20a, org.springframework.security.web.authentication.logout.LogoutFilter@72443081, org.chaostocosmos.metadata.metaphor.api.component.JwtRequestFilter@24534cb0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7a1b8a46, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@59fc6d05, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5d318e91, org.springframework.security.web.session.SessionManagementFilter@3bfae028, org.springframework.security.web.access.ExceptionTranslationFilter@7e34b127, org.springframework.security.web.access.intercept.AuthorizationFilter@6fe595dc]
+2024-08-23T10:47:41.059+09:00  INFO 1885306 --- [main] o.a.t.util.net.NioEndpoint.certificate   : Connector [https-jsse-nio-9999], TLS virtual host [_default_], certificate type [UNDEFINED] configured from [/home/chaos/.keystore] using alias [springboot] and with trust store [null]
+2024-08-23T10:47:41.071+09:00  INFO 1885306 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9999 (https) with context path ''
+2024-08-23T10:47:41.081+09:00  INFO 1885306 --- [main] o.c.metadata.metaphor.api.MetaphorAPI    : Started MetaphorAPI in 3.29 seconds (process running for 3.677)
+2024-08-23T10:48:38.339+09:00  INFO 1885306 --- [https-jsse-nio-9999-exec-6] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-08-23T10:48:38.339+09:00  INFO 1885306 --- [https-jsse-nio-9999-exec-6] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-08-23T10:48:38.341+09:00  INFO 1885306 --- [https-jsse-nio-9999-exec-6] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-08-23T10:48:38.352+09:00  INFO 1885306 --- [https-jsse-nio-9999-exec-6] o.c.m.m.api.component.LoggerAspect       : User: null ---------- Auth: null ------------------------- 
+2024-08-23T10:48:38.354+09:00  INFO 1885306 --- [https-jsse-nio-9999-exec-6] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:48:38.370+09:00  INFO 1885306 --- [https-jsse-nio-9999-exec-6] o.c.m.m.api.component.LoggerAspect       : User: null ---------- Auth: null ------------------------- 
+2024-08-23T10:48:38.371+09:00  INFO 1885306 --- [https-jsse-nio-9999-exec-6] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:48:57.990+09:00 ERROR 1885306 --- [https-jsse-nio-9999-exec-7] o.c.m.m.api.component.JwtRequestFilter   : Exception in Filter: jwtRequestFilter
+
+com.auth0.jwt.exceptions.JWTDecodeException: The token was expected to have 3 parts, but got 2.
+	at com.auth0.jwt.TokenUtils.wrongNumberOfParts(TokenUtils.java:45) ~[java-jwt-4.2.1.jar:4.2.1]
+	at com.auth0.jwt.TokenUtils.splitToken(TokenUtils.java:28) ~[java-jwt-4.2.1.jar:4.2.1]
+	at com.auth0.jwt.JWTDecoder.<init>(JWTDecoder.java:37) ~[java-jwt-4.2.1.jar:4.2.1]
+	at com.auth0.jwt.JWTVerifier.verify(JWTVerifier.java:444) ~[java-jwt-4.2.1.jar:4.2.1]
+	at org.chaostocosmos.metadata.metaphor.api.component.JwtUtil.extractUsername(JwtUtil.java:80) ~[main/:na]
+	at org.chaostocosmos.metadata.metaphor.api.component.JwtRequestFilter.doFilter(JwtRequestFilter.java:45) ~[main/:na]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.9.jar:6.0.9]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.9.jar:6.0.9]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.9.jar:6.0.9]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.0.9.jar:6.0.9]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.0.9.jar:6.0.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.0.9.jar:6.0.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.9.jar:6.0.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.0.9.jar:6.0.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.9.jar:6.0.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.0.9.jar:6.0.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.9.jar:6.0.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:166) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:482) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:894) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+
+2024-08-23T10:48:57.995+09:00 ERROR 1885306 --- [https-jsse-nio-9999-exec-7] o.c.m.m.api.component.JwtRequestFilter   : Exception in Filter: jwtRequestFilter
+
+com.auth0.jwt.exceptions.JWTDecodeException: The token was expected to have 3 parts, but got 2.
+	at com.auth0.jwt.TokenUtils.wrongNumberOfParts(TokenUtils.java:45) ~[java-jwt-4.2.1.jar:4.2.1]
+	at com.auth0.jwt.TokenUtils.splitToken(TokenUtils.java:28) ~[java-jwt-4.2.1.jar:4.2.1]
+	at com.auth0.jwt.JWTDecoder.<init>(JWTDecoder.java:37) ~[java-jwt-4.2.1.jar:4.2.1]
+	at com.auth0.jwt.JWTVerifier.verify(JWTVerifier.java:444) ~[java-jwt-4.2.1.jar:4.2.1]
+	at org.chaostocosmos.metadata.metaphor.api.component.JwtUtil.extractUsername(JwtUtil.java:80) ~[main/:na]
+	at org.chaostocosmos.metadata.metaphor.api.component.JwtRequestFilter.doFilter(JwtRequestFilter.java:45) ~[main/:na]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.0.9.jar:6.0.9]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.0.9.jar:6.0.9]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.0.9.jar:6.0.9]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.1.0.jar:6.1.0]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.0.9.jar:6.0.9]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.0.9.jar:6.0.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.0.9.jar:6.0.9]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.9.jar:6.0.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.0.9.jar:6.0.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.0.9.jar:6.0.9]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.ApplicationDispatcher.invoke(ApplicationDispatcher.java:642) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.ApplicationDispatcher.processRequest(ApplicationDispatcher.java:410) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.ApplicationDispatcher.doForward(ApplicationDispatcher.java:340) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.ApplicationDispatcher.forward(ApplicationDispatcher.java:277) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.StandardHostValve.custom(StandardHostValve.java:358) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.StandardHostValve.status(StandardHostValve.java:222) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:151) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:894) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
+	at java.base/java.lang.Thread.run(Thread.java:840) ~[na:na]
+
+2024-08-23T10:49:16.613+09:00  INFO 1885306 --- [https-jsse-nio-9999-exec-8] o.c.m.m.api.component.LoggerAspect       : User: null ---------- Auth: null ------------------------- 
+2024-08-23T10:49:16.613+09:00  INFO 1885306 --- [https-jsse-nio-9999-exec-8] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:49:16.614+09:00  INFO 1885306 --- [https-jsse-nio-9999-exec-8] o.c.m.m.api.component.LoggerAspect       : User: null ---------- Auth: null ------------------------- 
+2024-08-23T10:49:16.614+09:00  INFO 1885306 --- [https-jsse-nio-9999-exec-8] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:49:53.204+09:00  INFO 1885306 --- [https-jsse-nio-9999-exec-9] o.c.m.m.api.component.LoggerAspect       : User: null ---------- Auth: Baerer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXZlbG9wZXIiLCJleHAiOjE3MjQ0NjQxNTYsImlhdCI6MTcyNDM3Nzc1Nn0.nhLexbA6ujvEY_yA-gSv7k2Y-GeVhA9aj055YI7PH54 ------------------------- 
+2024-08-23T10:49:53.204+09:00  INFO 1885306 --- [https-jsse-nio-9999-exec-9] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:49:53.206+09:00  INFO 1885306 --- [https-jsse-nio-9999-exec-9] o.c.m.m.api.component.LoggerAspect       : User: null ---------- Auth: Baerer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXZlbG9wZXIiLCJleHAiOjE3MjQ0NjQxNTYsImlhdCI6MTcyNDM3Nzc1Nn0.nhLexbA6ujvEY_yA-gSv7k2Y-GeVhA9aj055YI7PH54 ------------------------- 
+2024-08-23T10:49:53.206+09:00  INFO 1885306 --- [https-jsse-nio-9999-exec-9] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:50:03.092+09:00  INFO 1885306 --- [https-jsse-nio-9999-exec-10] o.c.m.m.api.component.LoggerAspect       : User: null ---------- Auth: Baerer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXZlbG9wZXIiLCJleHAiOjE3MjQ0NjQxNTYsImlhdCI6MTcyNDM3Nzc1Nn0.nhLexbA6ujvEY_yA-gSv7k2Y-GeVhA9aj055YI7PH54 ------------------------- 
+2024-08-23T10:50:03.092+09:00  INFO 1885306 --- [https-jsse-nio-9999-exec-10] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:50:03.094+09:00  INFO 1885306 --- [https-jsse-nio-9999-exec-10] o.c.m.m.api.component.LoggerAspect       : User: null ---------- Auth: Baerer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXZlbG9wZXIiLCJleHAiOjE3MjQ0NjQxNTYsImlhdCI6MTcyNDM3Nzc1Nn0.nhLexbA6ujvEY_yA-gSv7k2Y-GeVhA9aj055YI7PH54 ------------------------- 
+2024-08-23T10:50:03.095+09:00  INFO 1885306 --- [https-jsse-nio-9999-exec-10] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:50:24.313+09:00  INFO 1891155 --- [main] o.c.metadata.metaphor.api.MetaphorAPI    : Starting MetaphorAPI using Java 17.0.12 with PID 1891155 (/home/chaos/Github/Metaphor/app/build/classes/java/main started by chaos in /home/chaos/Github/Metaphor)
+2024-08-23T10:50:24.317+09:00  INFO 1891155 --- [main] o.c.metadata.metaphor.api.MetaphorAPI    : No active profile set, falling back to 1 default profile: "default"
+2024-08-23T10:50:25.768+09:00  INFO 1891155 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9999 (https)
+2024-08-23T10:50:25.781+09:00  INFO 1891155 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-08-23T10:50:25.782+09:00  INFO 1891155 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2024-08-23T10:50:25.857+09:00  INFO 1891155 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-08-23T10:50:25.858+09:00  INFO 1891155 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1478 ms
+2024-08-23T10:50:26.000+09:00  INFO 1891155 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : Autowired annotation is not supported on static fields: private static org.chaostocosmos.metadata.metaphor.api.component.PropertiesUtils org.chaostocosmos.metadata.metaphor.api.config.MIME.propertiesUtils
+2024-08-23T10:50:26.453+09:00  INFO 1891155 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@17207f5b, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@373052b5, org.springframework.security.web.context.SecurityContextHolderFilter@1ca610a0, org.springframework.security.web.header.HeaderWriterFilter@39941489, org.springframework.security.web.authentication.logout.LogoutFilter@7730ef88, org.chaostocosmos.metadata.metaphor.api.component.JwtRequestFilter@642413d4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@b5c6a30, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2f677247, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@67e0ff3a, org.springframework.security.web.session.SessionManagementFilter@3d8d17a3, org.springframework.security.web.access.ExceptionTranslationFilter@67f63d26, org.springframework.security.web.access.intercept.AuthorizationFilter@15a3b42]
+2024-08-23T10:50:26.824+09:00  INFO 1891155 --- [main] o.a.t.util.net.NioEndpoint.certificate   : Connector [https-jsse-nio-9999], TLS virtual host [_default_], certificate type [UNDEFINED] configured from [/home/chaos/.keystore] using alias [springboot] and with trust store [null]
+2024-08-23T10:50:26.836+09:00  INFO 1891155 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9999 (https) with context path ''
+2024-08-23T10:50:26.846+09:00  INFO 1891155 --- [main] o.c.metadata.metaphor.api.MetaphorAPI    : Started MetaphorAPI in 3.27 seconds (process running for 3.67)
+2024-08-23T10:50:28.212+09:00  INFO 1891155 --- [https-jsse-nio-9999-exec-6] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-08-23T10:50:28.212+09:00  INFO 1891155 --- [https-jsse-nio-9999-exec-6] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-08-23T10:50:28.214+09:00  INFO 1891155 --- [https-jsse-nio-9999-exec-6] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-08-23T10:50:28.225+09:00  INFO 1891155 --- [https-jsse-nio-9999-exec-6] o.c.m.m.api.component.LoggerAspect       : User: null ---------- Auth: Baerer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXZlbG9wZXIiLCJleHAiOjE3MjQ0NjQxNTYsImlhdCI6MTcyNDM3Nzc1Nn0.nhLexbA6ujvEY_yA-gSv7k2Y-GeVhA9aj055YI7PH54 ------------------------- 
+2024-08-23T10:50:28.227+09:00  INFO 1891155 --- [https-jsse-nio-9999-exec-6] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:50:28.245+09:00  INFO 1891155 --- [https-jsse-nio-9999-exec-6] o.c.m.m.api.component.LoggerAspect       : User: null ---------- Auth: Baerer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXZlbG9wZXIiLCJleHAiOjE3MjQ0NjQxNTYsImlhdCI6MTcyNDM3Nzc1Nn0.nhLexbA6ujvEY_yA-gSv7k2Y-GeVhA9aj055YI7PH54 ------------------------- 
+2024-08-23T10:50:28.246+09:00  INFO 1891155 --- [https-jsse-nio-9999-exec-6] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:52:19.603+09:00  INFO 1895158 --- [main] o.c.metadata.metaphor.api.MetaphorAPI    : Starting MetaphorAPI using Java 17.0.12 with PID 1895158 (/home/chaos/Github/Metaphor/app/build/classes/java/main started by chaos in /home/chaos/Github/Metaphor)
+2024-08-23T10:52:19.611+09:00  INFO 1895158 --- [main] o.c.metadata.metaphor.api.MetaphorAPI    : No active profile set, falling back to 1 default profile: "default"
+2024-08-23T10:52:20.987+09:00  INFO 1895158 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9999 (https)
+2024-08-23T10:52:21.000+09:00  INFO 1895158 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-08-23T10:52:21.001+09:00  INFO 1895158 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2024-08-23T10:52:21.071+09:00  INFO 1895158 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-08-23T10:52:21.072+09:00  INFO 1895158 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1407 ms
+2024-08-23T10:52:21.233+09:00  INFO 1895158 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : Autowired annotation is not supported on static fields: private static org.chaostocosmos.metadata.metaphor.api.component.PropertiesUtils org.chaostocosmos.metadata.metaphor.api.config.MIME.propertiesUtils
+2024-08-23T10:52:21.703+09:00  INFO 1895158 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5d318e91, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@298b64f7, org.springframework.security.web.context.SecurityContextHolderFilter@7a1b8a46, org.springframework.security.web.header.HeaderWriterFilter@4c3de38e, org.springframework.security.web.authentication.logout.LogoutFilter@6588b715, org.chaostocosmos.metadata.metaphor.api.component.JwtRequestFilter@106d77da, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3d40a3b4, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@40d52be7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@740b6628, org.springframework.security.web.session.SessionManagementFilter@47829d6d, org.springframework.security.web.access.ExceptionTranslationFilter@60cb1ed6, org.springframework.security.web.access.intercept.AuthorizationFilter@3a8cea24]
+2024-08-23T10:52:22.073+09:00  INFO 1895158 --- [main] o.a.t.util.net.NioEndpoint.certificate   : Connector [https-jsse-nio-9999], TLS virtual host [_default_], certificate type [UNDEFINED] configured from [/home/chaos/.keystore] using alias [springboot] and with trust store [null]
+2024-08-23T10:52:22.101+09:00  INFO 1895158 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9999 (https) with context path ''
+2024-08-23T10:52:22.118+09:00  INFO 1895158 --- [main] o.c.metadata.metaphor.api.MetaphorAPI    : Started MetaphorAPI in 3.057 seconds (process running for 3.425)
+2024-08-23T10:52:23.570+09:00  INFO 1895158 --- [https-jsse-nio-9999-exec-6] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-08-23T10:52:23.571+09:00  INFO 1895158 --- [https-jsse-nio-9999-exec-6] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-08-23T10:52:23.572+09:00  INFO 1895158 --- [https-jsse-nio-9999-exec-6] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-08-23T10:52:23.584+09:00  INFO 1895158 --- [https-jsse-nio-9999-exec-6] o.c.m.m.api.component.LoggerAspect       : User: null ---------- Auth: Baerer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXZlbG9wZXIiLCJleHAiOjE3MjQ0NjQxNTYsImlhdCI6MTcyNDM3Nzc1Nn0.nhLexbA6ujvEY_yA-gSv7k2Y-GeVhA9aj055YI7PH54 ------------------------- 
+2024-08-23T10:52:23.585+09:00  INFO 1895158 --- [https-jsse-nio-9999-exec-6] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:52:23.608+09:00  INFO 1895158 --- [https-jsse-nio-9999-exec-6] o.c.m.m.api.component.LoggerAspect       : User: null ---------- Auth: Baerer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXZlbG9wZXIiLCJleHAiOjE3MjQ0NjQxNTYsImlhdCI6MTcyNDM3Nzc1Nn0.nhLexbA6ujvEY_yA-gSv7k2Y-GeVhA9aj055YI7PH54 ------------------------- 
+2024-08-23T10:52:23.608+09:00  INFO 1895158 --- [https-jsse-nio-9999-exec-6] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:52:34.235+09:00  INFO 1895158 --- [https-jsse-nio-9999-exec-8] o.c.m.m.api.component.LoggerAspect       : User: null ---------- Auth: Baerer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXZlbG9wZXIiLCJleHAiOjE3MjQ0NjQxNTYsImlhdCI6MTcyNDM3Nzc1Nn0.nhLexbA6ujvEY_yA-gSv7k2Y-GeVhA9aj055YI7PH54 ------------------------- 
+2024-08-23T10:52:34.235+09:00  INFO 1895158 --- [https-jsse-nio-9999-exec-8] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:52:34.238+09:00  INFO 1895158 --- [https-jsse-nio-9999-exec-8] o.c.m.m.api.component.LoggerAspect       : User: null ---------- Auth: Baerer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXZlbG9wZXIiLCJleHAiOjE3MjQ0NjQxNTYsImlhdCI6MTcyNDM3Nzc1Nn0.nhLexbA6ujvEY_yA-gSv7k2Y-GeVhA9aj055YI7PH54 ------------------------- 
+2024-08-23T10:52:34.238+09:00  INFO 1895158 --- [https-jsse-nio-9999-exec-8] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:53:15.228+09:00  INFO 1897177 --- [main] o.c.metadata.metaphor.api.MetaphorAPI    : Starting MetaphorAPI using Java 17.0.12 with PID 1897177 (/home/chaos/Github/Metaphor/app/build/classes/java/main started by chaos in /home/chaos/Github/Metaphor)
+2024-08-23T10:53:15.232+09:00  INFO 1897177 --- [main] o.c.metadata.metaphor.api.MetaphorAPI    : No active profile set, falling back to 1 default profile: "default"
+2024-08-23T10:53:16.648+09:00  INFO 1897177 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9999 (https)
+2024-08-23T10:53:16.663+09:00  INFO 1897177 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-08-23T10:53:16.663+09:00  INFO 1897177 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2024-08-23T10:53:16.737+09:00  INFO 1897177 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-08-23T10:53:16.737+09:00  INFO 1897177 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1451 ms
+2024-08-23T10:53:16.877+09:00  INFO 1897177 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : Autowired annotation is not supported on static fields: private static org.chaostocosmos.metadata.metaphor.api.component.PropertiesUtils org.chaostocosmos.metadata.metaphor.api.config.MIME.propertiesUtils
+2024-08-23T10:53:17.322+09:00  INFO 1897177 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@67e0ff3a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7b2bf745, org.springframework.security.web.context.SecurityContextHolderFilter@b5c6a30, org.springframework.security.web.header.HeaderWriterFilter@67332b1e, org.springframework.security.web.authentication.logout.LogoutFilter@4e3f2908, org.chaostocosmos.metadata.metaphor.api.component.JwtRequestFilter@3f183caa, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1775c4e7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7a1b8a46, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6fe595dc, org.springframework.security.web.session.SessionManagementFilter@7f79edee, org.springframework.security.web.access.ExceptionTranslationFilter@789c3057, org.springframework.security.web.access.intercept.AuthorizationFilter@17207f5b]
+2024-08-23T10:53:17.663+09:00  INFO 1897177 --- [main] o.a.t.util.net.NioEndpoint.certificate   : Connector [https-jsse-nio-9999], TLS virtual host [_default_], certificate type [UNDEFINED] configured from [/home/chaos/.keystore] using alias [springboot] and with trust store [null]
+2024-08-23T10:53:17.674+09:00  INFO 1897177 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9999 (https) with context path ''
+2024-08-23T10:53:17.683+09:00  INFO 1897177 --- [main] o.c.metadata.metaphor.api.MetaphorAPI    : Started MetaphorAPI in 3.006 seconds (process running for 3.398)
+2024-08-23T10:53:19.639+09:00  INFO 1897177 --- [https-jsse-nio-9999-exec-6] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-08-23T10:53:19.640+09:00  INFO 1897177 --- [https-jsse-nio-9999-exec-6] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-08-23T10:53:19.642+09:00  INFO 1897177 --- [https-jsse-nio-9999-exec-6] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-08-23T10:53:19.655+09:00  INFO 1897177 --- [https-jsse-nio-9999-exec-6] o.c.m.m.api.component.LoggerAspect       : User: null ---------- Auth: Baerer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXZlbG9wZXIiLCJleHAiOjE3MjQ0NjQxNTYsImlhdCI6MTcyNDM3Nzc1Nn0.nhLexbA6ujvEY_yA-gSv7k2Y-GeVhA9aj055YI7PH54 ------------------------- 
+2024-08-23T10:53:19.657+09:00  INFO 1897177 --- [https-jsse-nio-9999-exec-6] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:53:19.676+09:00  INFO 1897177 --- [https-jsse-nio-9999-exec-6] o.c.m.m.api.component.LoggerAspect       : User: null ---------- Auth: Baerer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXZlbG9wZXIiLCJleHAiOjE3MjQ0NjQxNTYsImlhdCI6MTcyNDM3Nzc1Nn0.nhLexbA6ujvEY_yA-gSv7k2Y-GeVhA9aj055YI7PH54 ------------------------- 
+2024-08-23T10:53:19.677+09:00  INFO 1897177 --- [https-jsse-nio-9999-exec-6] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:53:54.990+09:00  INFO 1897177 --- [https-jsse-nio-9999-exec-7] o.c.m.m.api.component.LoggerAspect       : User: null ---------- Auth: null ------------------------- 
+2024-08-23T10:53:54.991+09:00  INFO 1897177 --- [https-jsse-nio-9999-exec-7] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:53:54.992+09:00  INFO 1897177 --- [https-jsse-nio-9999-exec-7] o.c.m.m.api.component.LoggerAspect       : User: null ---------- Auth: null ------------------------- 
+2024-08-23T10:53:54.992+09:00  INFO 1897177 --- [https-jsse-nio-9999-exec-7] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:54:36.951+09:00  INFO 1897177 --- [https-jsse-nio-9999-exec-8] o.c.m.m.api.component.LoggerAspect       : User: admin ---------- Auth: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDQ2NDQzNSwiaWF0IjoxNzI0Mzc4MDM1fQ.-l3XCcMeUH_7kcX5Cq4660zR2iFE_iM8rDVGAgoqfcQ ------------------------- 
+2024-08-23T10:54:36.953+09:00  INFO 1897177 --- [https-jsse-nio-9999-exec-8] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:54:36.955+09:00  INFO 1897177 --- [https-jsse-nio-9999-exec-8] o.c.m.m.api.component.LoggerAspect       : User: admin ---------- Auth: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDQ2NDQzNSwiaWF0IjoxNzI0Mzc4MDM1fQ.-l3XCcMeUH_7kcX5Cq4660zR2iFE_iM8rDVGAgoqfcQ ------------------------- 
+2024-08-23T10:54:36.957+09:00  INFO 1897177 --- [https-jsse-nio-9999-exec-8] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:54:59.141+09:00  INFO 1897177 --- [https-jsse-nio-9999-exec-9] o.c.m.m.api.component.LoggerAspect       : User: admin ---------- Auth: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDQ2NDQzNSwiaWF0IjoxNzI0Mzc4MDM1fQ.-l3XCcMeUH_7kcX5Cq4660zR2iFE_iM8rDVGAgoqfcQ ------------------------- 
+2024-08-23T10:54:59.143+09:00  INFO 1897177 --- [https-jsse-nio-9999-exec-9] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:54:59.145+09:00  INFO 1897177 --- [https-jsse-nio-9999-exec-9] o.c.m.m.api.component.LoggerAspect       : User: admin ---------- Auth: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDQ2NDQzNSwiaWF0IjoxNzI0Mzc4MDM1fQ.-l3XCcMeUH_7kcX5Cq4660zR2iFE_iM8rDVGAgoqfcQ ------------------------- 
+2024-08-23T10:54:59.147+09:00  INFO 1897177 --- [https-jsse-nio-9999-exec-9] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:55:37.115+09:00  INFO 1897177 --- [https-jsse-nio-9999-exec-10] o.c.m.m.api.component.LoggerAspect       : User: admin ---------- Auth: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDQ2NDQzNSwiaWF0IjoxNzI0Mzc4MDM1fQ.-l3XCcMeUH_7kcX5Cq4660zR2iFE_iM8rDVGAgoqfcQ ------------------------- 
+2024-08-23T10:55:37.117+09:00  INFO 1897177 --- [https-jsse-nio-9999-exec-10] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:55:37.120+09:00  INFO 1897177 --- [https-jsse-nio-9999-exec-10] o.c.m.m.api.component.LoggerAspect       : User: admin ---------- Auth: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDQ2NDQzNSwiaWF0IjoxNzI0Mzc4MDM1fQ.-l3XCcMeUH_7kcX5Cq4660zR2iFE_iM8rDVGAgoqfcQ ------------------------- 
+2024-08-23T10:55:37.122+09:00  INFO 1897177 --- [https-jsse-nio-9999-exec-10] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:56:48.665+09:00  INFO 1905416 --- [main] o.c.metadata.metaphor.api.MetaphorAPI    : Starting MetaphorAPI using Java 17.0.12 with PID 1905416 (/home/chaos/Github/Metaphor/app/build/classes/java/main started by chaos in /home/chaos/Github/Metaphor)
+2024-08-23T10:56:48.673+09:00  INFO 1905416 --- [main] o.c.metadata.metaphor.api.MetaphorAPI    : No active profile set, falling back to 1 default profile: "default"
+2024-08-23T10:56:50.060+09:00  INFO 1905416 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9999 (https)
+2024-08-23T10:56:50.076+09:00  INFO 1905416 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-08-23T10:56:50.076+09:00  INFO 1905416 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2024-08-23T10:56:50.167+09:00  INFO 1905416 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-08-23T10:56:50.168+09:00  INFO 1905416 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1445 ms
+2024-08-23T10:56:50.362+09:00  INFO 1905416 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : Autowired annotation is not supported on static fields: private static org.chaostocosmos.metadata.metaphor.api.component.PropertiesUtils org.chaostocosmos.metadata.metaphor.api.config.MIME.propertiesUtils
+2024-08-23T10:56:50.828+09:00  INFO 1905416 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@337a6d30, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2921a36a, org.springframework.security.web.context.SecurityContextHolderFilter@47b269c4, org.springframework.security.web.header.HeaderWriterFilter@47829d6d, org.springframework.security.web.authentication.logout.LogoutFilter@298b64f7, org.chaostocosmos.metadata.metaphor.api.component.JwtRequestFilter@65e0b505, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@32091c14, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1e3df614, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2b73bd6b, org.springframework.security.web.session.SessionManagementFilter@629a9f26, org.springframework.security.web.access.ExceptionTranslationFilter@b5c6a30, org.springframework.security.web.access.intercept.AuthorizationFilter@5f0bab7e]
+2024-08-23T10:56:51.220+09:00  INFO 1905416 --- [main] o.a.t.util.net.NioEndpoint.certificate   : Connector [https-jsse-nio-9999], TLS virtual host [_default_], certificate type [UNDEFINED] configured from [/home/chaos/.keystore] using alias [springboot] and with trust store [null]
+2024-08-23T10:56:51.233+09:00  INFO 1905416 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9999 (https) with context path ''
+2024-08-23T10:56:51.247+09:00  INFO 1905416 --- [main] o.c.metadata.metaphor.api.MetaphorAPI    : Started MetaphorAPI in 3.069 seconds (process running for 3.365)
+2024-08-23T10:56:53.532+09:00  INFO 1905416 --- [https-jsse-nio-9999-exec-6] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-08-23T10:56:53.533+09:00  INFO 1905416 --- [https-jsse-nio-9999-exec-6] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-08-23T10:56:53.534+09:00  INFO 1905416 --- [https-jsse-nio-9999-exec-6] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-08-23T10:56:53.564+09:00  INFO 1905416 --- [https-jsse-nio-9999-exec-6] o.c.m.m.api.component.LoggerAspect       : User: admin ---------- Auth: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDQ2NDQzNSwiaWF0IjoxNzI0Mzc4MDM1fQ.-l3XCcMeUH_7kcX5Cq4660zR2iFE_iM8rDVGAgoqfcQ ------------------------- 
+2024-08-23T10:56:53.573+09:00  INFO 1905416 --- [https-jsse-nio-9999-exec-6] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:56:53.596+09:00  INFO 1905416 --- [https-jsse-nio-9999-exec-6] o.c.m.m.api.component.LoggerAspect       : User: admin ---------- Auth: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDQ2NDQzNSwiaWF0IjoxNzI0Mzc4MDM1fQ.-l3XCcMeUH_7kcX5Cq4660zR2iFE_iM8rDVGAgoqfcQ ------------------------- 
+2024-08-23T10:56:53.598+09:00  INFO 1905416 --- [https-jsse-nio-9999-exec-6] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:57:05.528+09:00  INFO 1905416 --- [https-jsse-nio-9999-exec-7] o.c.m.m.api.component.LoggerAspect       : User: admin ---------- Auth: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDQ2NDQzNSwiaWF0IjoxNzI0Mzc4MDM1fQ.-l3XCcMeUH_7kcX5Cq4660zR2iFE_iM8rDVGAgoqfcQ ------------------------- 
+2024-08-23T10:57:05.530+09:00  INFO 1905416 --- [https-jsse-nio-9999-exec-7] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:57:05.533+09:00  INFO 1905416 --- [https-jsse-nio-9999-exec-7] o.c.m.m.api.component.LoggerAspect       : User: admin ---------- Auth: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDQ2NDQzNSwiaWF0IjoxNzI0Mzc4MDM1fQ.-l3XCcMeUH_7kcX5Cq4660zR2iFE_iM8rDVGAgoqfcQ ------------------------- 
+2024-08-23T10:57:05.535+09:00  INFO 1905416 --- [https-jsse-nio-9999-exec-7] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:57:31.382+09:00  INFO 1907249 --- [main] o.c.metadata.metaphor.api.MetaphorAPI    : Starting MetaphorAPI using Java 17.0.12 with PID 1907249 (/home/chaos/Github/Metaphor/app/build/classes/java/main started by chaos in /home/chaos/Github/Metaphor)
+2024-08-23T10:57:31.391+09:00  INFO 1907249 --- [main] o.c.metadata.metaphor.api.MetaphorAPI    : No active profile set, falling back to 1 default profile: "default"
+2024-08-23T10:57:33.075+09:00  INFO 1907249 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9999 (https)
+2024-08-23T10:57:33.090+09:00  INFO 1907249 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-08-23T10:57:33.090+09:00  INFO 1907249 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+2024-08-23T10:57:33.163+09:00  INFO 1907249 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-08-23T10:57:33.164+09:00  INFO 1907249 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1687 ms
+2024-08-23T10:57:33.312+09:00  INFO 1907249 --- [main] f.a.AutowiredAnnotationBeanPostProcessor : Autowired annotation is not supported on static fields: private static org.chaostocosmos.metadata.metaphor.api.component.PropertiesUtils org.chaostocosmos.metadata.metaphor.api.config.MIME.propertiesUtils
+2024-08-23T10:57:33.835+09:00  INFO 1907249 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5d318e91, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@298b64f7, org.springframework.security.web.context.SecurityContextHolderFilter@7a1b8a46, org.springframework.security.web.header.HeaderWriterFilter@4c3de38e, org.springframework.security.web.authentication.logout.LogoutFilter@6588b715, org.chaostocosmos.metadata.metaphor.api.component.JwtRequestFilter@6f9c5048, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3d40a3b4, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@40d52be7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@740b6628, org.springframework.security.web.session.SessionManagementFilter@47829d6d, org.springframework.security.web.access.ExceptionTranslationFilter@60cb1ed6, org.springframework.security.web.access.intercept.AuthorizationFilter@3a8cea24]
+2024-08-23T10:57:34.310+09:00  INFO 1907249 --- [main] o.a.t.util.net.NioEndpoint.certificate   : Connector [https-jsse-nio-9999], TLS virtual host [_default_], certificate type [UNDEFINED] configured from [/home/chaos/.keystore] using alias [springboot] and with trust store [null]
+2024-08-23T10:57:34.328+09:00  INFO 1907249 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9999 (https) with context path ''
+2024-08-23T10:57:34.342+09:00  INFO 1907249 --- [main] o.c.metadata.metaphor.api.MetaphorAPI    : Started MetaphorAPI in 3.58 seconds (process running for 3.949)
+2024-08-23T10:57:40.137+09:00  INFO 1907249 --- [https-jsse-nio-9999-exec-6] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-08-23T10:57:40.138+09:00  INFO 1907249 --- [https-jsse-nio-9999-exec-6] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-08-23T10:57:40.140+09:00  INFO 1907249 --- [https-jsse-nio-9999-exec-6] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-08-23T10:57:40.175+09:00  INFO 1907249 --- [https-jsse-nio-9999-exec-6] o.c.m.m.api.component.LoggerAspect       : User: admin ---------- Auth: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDQ2NDQzNSwiaWF0IjoxNzI0Mzc4MDM1fQ.-l3XCcMeUH_7kcX5Cq4660zR2iFE_iM8rDVGAgoqfcQ ------------------------- 
+2024-08-23T10:57:40.181+09:00  INFO 1907249 --- [https-jsse-nio-9999-exec-6] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:57:40.194+09:00  INFO 1907249 --- [https-jsse-nio-9999-exec-6] o.c.m.m.api.component.LoggerAspect       : User: admin ---------- Auth: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDQ2NDQzNSwiaWF0IjoxNzI0Mzc4MDM1fQ.-l3XCcMeUH_7kcX5Cq4660zR2iFE_iM8rDVGAgoqfcQ ------------------------- 
+2024-08-23T10:57:40.194+09:00  INFO 1907249 --- [https-jsse-nio-9999-exec-6] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:57:50.255+09:00  INFO 1907249 --- [https-jsse-nio-9999-exec-1] o.c.m.m.api.component.LoggerAspect       : User: admin ---------- Auth: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDQ2NDQzNSwiaWF0IjoxNzI0Mzc4MDM1fQ.-l3XCcMeUH_7kcX5Cq4660zR2iFE_iM8rDVGAgoqfcQ ------------------------- 
+2024-08-23T10:57:50.258+09:00  INFO 1907249 --- [https-jsse-nio-9999-exec-1] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:57:50.260+09:00  INFO 1907249 --- [https-jsse-nio-9999-exec-1] o.c.m.m.api.component.LoggerAspect       : User: admin ---------- Auth: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDQ2NDQzNSwiaWF0IjoxNzI0Mzc4MDM1fQ.-l3XCcMeUH_7kcX5Cq4660zR2iFE_iM8rDVGAgoqfcQ ------------------------- 
+2024-08-23T10:57:50.260+09:00  INFO 1907249 --- [https-jsse-nio-9999-exec-1] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:58:12.896+09:00  INFO 1907249 --- [https-jsse-nio-9999-exec-8] o.c.m.m.api.component.LoggerAspect       : User: admin ---------- Auth: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDQ2NDQzNSwiaWF0IjoxNzI0Mzc4MDM1fQ.-l3XCcMeUH_7kcX5Cq4660zR2iFE_iM8rDVGAgoqfcQ ------------------------- 
+2024-08-23T10:58:12.898+09:00  INFO 1907249 --- [https-jsse-nio-9999-exec-8] o.c.m.m.api.component.LoggerAspect       : Filter process finish......
+2024-08-23T10:58:12.900+09:00  INFO 1907249 --- [https-jsse-nio-9999-exec-8] o.c.m.m.api.component.LoggerAspect       : User: admin ---------- Auth: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTcyNDQ2NDQzNSwiaWF0IjoxNzI0Mzc4MDM1fQ.-l3XCcMeUH_7kcX5Cq4660zR2iFE_iM8rDVGAgoqfcQ ------------------------- 
+2024-08-23T10:58:12.900+09:00  INFO 1907249 --- [https-jsse-nio-9999-exec-8] o.c.m.m.api.component.LoggerAspect       : Filter process finish......

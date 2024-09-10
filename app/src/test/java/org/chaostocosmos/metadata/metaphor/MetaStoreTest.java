@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+import org.chaostocosmos.metadata.metaphor.core.MetaHelper;
 import org.junit.jupiter.api.Test;
 
 public class MetaStoreTest {
