@@ -2,10 +2,10 @@ package org.chaostocosmos.metadata.metaphor.api;
 
 import java.io.IOException;
 
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+
 
 /**
  * MetaphorAPI
@@ -14,7 +14,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  */
 @SpringBootApplication
 @EnableAspectJAutoProxy
-public class MetaphorAPI {
+public class MetaphorAPI { 
     /**
      * Application context
      */
